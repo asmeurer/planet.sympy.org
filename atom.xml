@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:planet="http://planet.intertwingly.net/" xmlns:indexing="urn:atom-extension:indexing" indexing:index="no"><access:restriction xmlns:access="http://www.bloglines.com/about/specs/fac-1.0" relationship="deny"/>
   <title>Planet SymPy</title>
-  <updated>2011-05-22T21:30:13Z</updated>
+  <updated>2011-05-22T21:40:11Z</updated>
   <generator uri="http://intertwingly.net/code/venus/">Venus</generator>
   <author>
     <name>Ondrej Certik</name>
@@ -118,7 +118,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -159,7 +159,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -217,7 +217,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -286,7 +286,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -368,7 +368,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -450,7 +450,7 @@ In case you don’t know for some reason, Google Summer of Code is a program whe
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -548,7 +548,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -579,7 +579,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
     </source>
   </entry>
 
@@ -608,7 +608,43 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-22T21:30:06Z</updated>
+      <updated>2011-05-22T21:40:05Z</updated>
+    </source>
+  </entry>
+
+  <entry>
+    <id>tag:blogger.com,1999:blog-8510171342300140296.post-8490398923441347584</id>
+    <link href="http://seanvig.blogspot.com/feeds/8490398923441347584/comments/default" rel="replies" type="application/atom+xml"/>
+    <link href="http://seanvig.blogspot.com/2011/04/best-things-in-life-are-free-and-open.html#comment-form" rel="replies" type="text/html"/>
+    <link href="http://www.blogger.com/feeds/8510171342300140296/posts/default/8490398923441347584" rel="edit" type="application/atom+xml"/>
+    <link href="http://www.blogger.com/feeds/8510171342300140296/posts/default/8490398923441347584" rel="self" type="application/atom+xml"/>
+    <link href="http://seanvig.blogspot.com/2011/04/best-things-in-life-are-free-and-open.html" rel="alternate" type="text/html"/>
+    <title>The best things in life are free (and open source)</title>
+    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Hi all,<br/>This adventure into blogging is to document the work I will be doing this summer with <a href="http://sympy.org/">SymPy</a>, an open source symbolic mathematics library written in Python. The project will be done as a part of the <a href="http://socghop.appspot.com/">Google Summer of Code</a> program. This summer, I will be developing a symbolic class for creating Clebsch-Gordon coefficients and will develop the spin algebra in the existing quantum physics module to utilize these coefficients. The gory details can be read in my <a href="https://github.com/sympy/sympy/wiki/GSoC%202011%20Application%20Sean%20Vig">application</a>. My mentor for this project will b<span class="Apple-style-span" style="font-family: inherit;">e <span class="Apple-style-span" style="border-collapse: collapse;">Ondřej Čertík. The project officially starts May 24, but I'll be diving in once I finish up the last of my finals May 14. </span></span><span class="Apple-style-span" style="border-collapse: collapse;">I will be documenting my progress on the project throughout the summer through this blog, and anyone interested in this is free to watch for updates once the project is underway. All my work will be pushed to </span><a href="https://github.com/flacjacket/sympy" style="border-collapse: collapse;">my SymPy fork</a><span class="Apple-style-span" style="border-collapse: collapse;"> on github.</span><br/><span class="Apple-style-span" style="border-collapse: collapse;"><br/></span><br/><span class="Apple-style-span" style="border-collapse: collapse;">That's enough for now, I'll be checking back in once I get started in the summer. Now, back to trying to graduate.</span><div class="blogger-post-footer"><img alt="" height="1" src="https://blogger.googleusercontent.com/tracker/8510171342300140296-8490398923441347584?l=seanvig.blogspot.com" width="1"/></div></div>
+    </content>
+    <updated>2011-04-26T00:02:27Z</updated>
+    <published>2011-04-26T00:02:00Z</published>
+    <category scheme="http://www.blogger.com/atom/ns#" term="sympy"/>
+    <category scheme="http://www.blogger.com/atom/ns#" term="GSoC"/>
+    <author>
+      <name>Sean Vig</name>
+      <email>noreply@blogger.com</email>
+      <uri>http://www.blogger.com/profile/18029750000026588134</uri>
+    </author>
+    <source>
+      <id>tag:blogger.com,1999:blog-8510171342300140296</id>
+      <author>
+        <name>Sean Vig</name>
+        <email>noreply@blogger.com</email>
+        <uri>http://www.blogger.com/profile/18029750000026588134</uri>
+      </author>
+      <link href="http://seanvig.blogspot.com/feeds/posts/default" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"/>
+      <link href="http://www.blogger.com/feeds/8510171342300140296/posts/default/-/sympy" rel="self" type="application/atom+xml"/>
+      <link href="http://seanvig.blogspot.com/search/label/sympy" rel="alternate" type="text/html"/>
+      <link href="http://pubsubhubbub.appspot.com/" rel="hub" type="text/html"/>
+      <subtitle>Developing Wigner-3nj Symbols in SymPy</subtitle>
+      <title>Sean Vig's 2011 GSoC Project</title>
+      <updated>2011-04-26T00:15:13Z</updated>
     </source>
   </entry>
 
@@ -1009,7 +1045,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -1124,7 +1160,7 @@ True
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -1293,7 +1329,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -1348,7 +1384,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -1436,7 +1472,7 @@ T = T[:-1]<br/>
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:09Z</updated>
     </source>
   </entry>
 
@@ -2097,7 +2133,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:09Z</updated>
     </source>
   </entry>
 
@@ -2234,7 +2270,7 @@ difference: 1.04406500806e-14
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T21:30:12Z</updated>
+      <updated>2011-05-22T21:40:11Z</updated>
     </source>
   </entry>
 
@@ -2346,7 +2382,7 @@ In [56]: %timeit M_my = matmat(Q, R)
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T21:30:12Z</updated>
+      <updated>2011-05-22T21:40:11Z</updated>
     </source>
   </entry>
 
@@ -2672,7 +2708,7 @@ Out[8]: 0
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T21:30:10Z</updated>
+      <updated>2011-05-22T21:40:08Z</updated>
     </source>
   </entry>
 
@@ -2773,40 +2809,7 @@ for (int i=0; i&lt;m; i++){
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T21:30:12Z</updated>
-    </source>
-  </entry>
-
-  <entry>
-    <id>tag:blogger.com,1999:blog-9135222751616024074.post-143425197871935102</id>
-    <link href="http://mattjcurry.blogspot.com/feeds/143425197871935102/comments/default" rel="replies" type="application/atom+xml"/>
-    <link href="http://mattjcurry.blogspot.com/2010/07/more-design-issues.html#comment-form" rel="replies" type="text/html"/>
-    <link href="http://www.blogger.com/feeds/9135222751616024074/posts/default/143425197871935102" rel="edit" type="application/atom+xml"/>
-    <link href="http://www.blogger.com/feeds/9135222751616024074/posts/default/143425197871935102" rel="self" type="application/atom+xml"/>
-    <link href="http://mattjcurry.blogspot.com/2010/07/more-design-issues.html" rel="alternate" type="text/html"/>
-    <title>More Design Issues</title>
-    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Unfortunately, it seems with my project that we keep running into more and more design issues. Put simply, the issues arise with Sympy's Mul and Add (and Pow) classes. In order for my quantum objects to be handled properly, we are going to have to subclass these classes. You can find more information about the issues <a href="https://docs.google.com/document/pub?id=1aDhhEam6TzOYdtEBd9Yw_vD3jW7MFHnz6lpsPb87V9w">here</a> (originally posted on the Sympy Google group).<div><br/></div><div>With all that to say, there still is a bit of time for coding left! Next week, we are going to subclass Mul, Add, and Pow (qmul, qadd, qpow). After that happens, I plan on creating a physics example that uses the existing quantum library I've helped build. I think I'm going to do the particle in a box (with infinitely strong walls) and use a position state to do so.</div><div><br/></div><div>More on this next week when we get everything sorted out!</div><div class="blogger-post-footer"><img alt="" height="1" src="https://blogger.googleusercontent.com/tracker/9135222751616024074-143425197871935102?l=mattjcurry.blogspot.com" width="1"/></div></div>
-    </content>
-    <updated>2010-07-31T18:56:00Z</updated>
-    <published>2010-07-31T18:14:00Z</published>
-    <author>
-      <name>mcurry</name>
-      <email>noreply@blogger.com</email>
-      <uri>http://www.blogger.com/profile/10457551070900109390</uri>
-    </author>
-    <source>
-      <id>tag:blogger.com,1999:blog-9135222751616024074</id>
-      <author>
-        <name>mcurry</name>
-        <email>noreply@blogger.com</email>
-        <uri>http://www.blogger.com/profile/10457551070900109390</uri>
-      </author>
-      <link href="http://mattjcurry.blogspot.com/feeds/posts/default" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"/>
-      <link href="http://www.blogger.com/feeds/9135222751616024074/posts/default" rel="self" type="application/atom+xml"/>
-      <link href="http://mattjcurry.blogspot.com/" rel="alternate" type="text/html"/>
-      <link href="http://pubsubhubbub.appspot.com/" rel="hub" type="text/html"/>
-      <title>Matt's Blog</title>
-      <updated>2011-04-21T21:50:24Z</updated>
+      <updated>2011-05-22T21:40:10Z</updated>
     </source>
   </entry>
 </feed>

@@ -2,7 +2,7 @@
 <opml version="1.1">
   <head>
     <title>Planet SymPy</title>
-    <dateModified>Sun, 22 May 2011 21:30:13 GMT</dateModified>
+    <dateModified>Sun, 22 May 2011 21:40:11 GMT</dateModified>
     <ownerName>Ondrej Certik</ownerName>
     <ownerEmail>ondrej@certik.cz</ownerEmail>
   </head>
@@ -20,6 +20,7 @@
     <outline type="rss" text="Freddie Witherden" title="GSoC Mathtex" xmlUrl="http://www.blogger.com/feeds/7648717043547744590/posts/default"/>
     <outline type="rss" text="Official SymPy blog" title="Official SymPy blog" xmlUrl="http://www.blogger.com/feeds/2520472460430880330/posts/default"/>
     <outline type="rss" text="Matthew Curry" title="Matt's Blog" xmlUrl="http://www.blogger.com/feeds/9135222751616024074/posts/default"/>
+    <outline type="rss" text="Sean Vig" title="Sean Vig's 2011 GSoC Project" xmlUrl="http://www.blogger.com/feeds/8510171342300140296/posts/default/-/sympy"/>
     <outline type="rss" text="&#xD8;yvind Jensen" title="Jensen's Sympy Blog" xmlUrl="http://ojensen.wordpress.com/feed/"/>
     <outline type="rss" text="Vlada Peric" title="Vlada's Blog" xmlUrl="http://www.blogger.com/feeds/8814696591561172392/posts/default/-/SymPy"/>
     <outline type="rss" text="Jeremias Yehdegho" title="f1728 &#xBB; SymPy" xmlUrl="http://f1728.wordpress.com/category/SymPy/feed/"/>
