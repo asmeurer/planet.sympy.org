@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:planet="http://planet.intertwingly.net/" xmlns:indexing="urn:atom-extension:indexing" indexing:index="no"><access:restriction xmlns:access="http://www.bloglines.com/about/specs/fac-1.0" relationship="deny"/>
   <title>Planet SymPy</title>
-  <updated>2011-05-22T05:26:11Z</updated>
+  <updated>2011-05-22T05:30:23Z</updated>
   <generator uri="http://intertwingly.net/code/venus/">Venus</generator>
   <author>
     <name>Ondrej Certik</name>
@@ -39,7 +39,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://dlpeterson.com/blog" rel="alternate" type="text/html"/>
       <subtitle>Mechanical Engineering PhD. candidate, UC Davis</subtitle>
       <title>Dale Peterson</title>
-      <updated>2011-05-22T04:57:10Z</updated>
+      <updated>2011-05-22T05:30:23Z</updated>
     </source>
   </entry>
 
@@ -68,7 +68,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -121,7 +121,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -203,7 +203,7 @@ In case you don’t know for some reason, Google Summer of Code is a program whe
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -238,7 +238,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -267,7 +267,7 @@ gemm, = scipy.<span style="color: black;">linalg</span>.<span style="color: blac
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -320,7 +320,7 @@ gemm, = scipy.<span style="color: black;">linalg</span>.<span style="color: blac
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -346,7 +346,7 @@ gemm, = scipy.<span style="color: black;">linalg</span>.<span style="color: blac
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -457,7 +457,7 @@ gemm, = scipy.<span style="color: black;">linalg</span>.<span style="color: blac
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:51Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -515,7 +515,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:51Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -542,7 +542,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -565,7 +565,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -639,7 +639,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -754,7 +754,7 @@ True
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -858,7 +858,7 @@ Out<span style="color: black;">[</span><span style="color: #ff4500;">99</span><s
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -883,7 +883,7 @@ Out<span style="color: black;">[</span><span style="color: #ff4500;">99</span><s
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -923,7 +923,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -978,7 +978,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -1012,7 +1012,7 @@ release.
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1066,7 +1066,7 @@ T = T[:-1]<br/>
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:10Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -1094,7 +1094,7 @@ T = T[:-1]<br/>
       <link href="http://dlpeterson.com/blog" rel="alternate" type="text/html"/>
       <subtitle>Mechanical Engineering PhD. candidate, UC Davis</subtitle>
       <title>Dale Peterson</title>
-      <updated>2011-05-22T04:57:10Z</updated>
+      <updated>2011-05-22T05:30:23Z</updated>
     </source>
   </entry>
 
@@ -1121,7 +1121,7 @@ T = T[:-1]<br/>
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1156,7 +1156,7 @@ T = T[:-1]<br/>
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1180,7 +1180,7 @@ T = T[:-1]<br/>
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:51Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1296,7 +1296,7 @@ Out<span style="color: black;">[</span><span style="color: #ff4500;">2</span><sp
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1324,7 +1324,7 @@ Out<span style="color: black;">[</span><span style="color: #ff4500;">2</span><sp
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1430,7 +1430,7 @@ or improving old ones. This includes:</p>
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1614,7 +1614,7 @@ of text documents using sparse features, contributed by Olivier Grisel.</a></p><
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1643,7 +1643,7 @@ config.add_extension('foo',<br/>
       <link href="http://fseoane.net/blog" rel="alternate" type="text/html"/>
       <subtitle>Pink elephants and fortran libraries</subtitle>
       <title>F. Pedregosa</title>
-      <updated>2011-05-22T04:56:50Z</updated>
+      <updated>2011-05-22T05:30:05Z</updated>
     </source>
   </entry>
 
@@ -1727,7 +1727,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -1864,7 +1864,7 @@ difference: 1.04406500806e-14
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T05:26:11Z</updated>
+      <updated>2011-05-22T05:30:21Z</updated>
     </source>
   </entry>
 
@@ -1976,7 +1976,7 @@ In [56]: %timeit M_my = matmat(Q, R)
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T05:26:11Z</updated>
+      <updated>2011-05-22T05:30:21Z</updated>
     </source>
   </entry>
 
@@ -2302,7 +2302,7 @@ Out[8]: 0
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
@@ -2403,7 +2403,7 @@ for (int i=0; i&lt;m; i++){
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-22T05:26:10Z</updated>
+      <updated>2011-05-22T05:30:21Z</updated>
     </source>
   </entry>
 
@@ -2659,7 +2659,7 @@ Out[34]:
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-22T05:26:09Z</updated>
+      <updated>2011-05-22T05:30:16Z</updated>
     </source>
   </entry>
 
