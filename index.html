@@ -68,6 +68,267 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
 
 </div>
 <div class="daygroup">
+<h2>May 10, 2011</h2>
+
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://vperic.blogspot.com/search/label/SymPy" title="Vlada's Blog">Vlada Peric</a></h3>
+
+
+<div class="entrygroup" id="tag:blogger.com,1999:blog-8814696591561172392.post-6902557110114410157">
+<h4><a href="http://vperic.blogspot.com/2011/05/setuppy-gsocblog.html">./setup.py GSoC/blog</a></h4>
+<div class="entry">
+<div class="content">
+<div style="text-align: left;" dir="ltr">[title shamelessly stolen from my mentor, Ronan Lamy]<br /><br />As hinted to by the title, I've been accepted for the <a href="http://www.google-melange.com/gsoc/homepage/google/gsoc2011">Google Summer of Code 2011</a>. My work will be on <a href="http://sympy.org/">SymPy</a>, which is a Python library for symbolic mathematics (think Maple or Mathematica), and my goal is to convert it to Python 3. Namely, I will try to support all Python versions starting from 2.5, and this should be accomplished with the use of a single code-base (and automatic running of the 2to3 tool in the Python 3 use case). You can read my full application <a href="https://github.com/sympy/sympy/wiki/GSoC-2011-Application%3A-Vladimir-Peri%C4%87%3A-Porting-to-Python-3">here</a>.<br /><br />As this is a complex issue, the first order of business would be to establish an automated testing system that would be able to spot any regressions (currently, SymPy supports Python 2.4 - 2.7, and there are already various small bugs and differences in behavior based on Python version); the current contenders are <a href="http://jenkins-ci.org/">Jenkins</a> (via <a href="http://codespeak.net/tox/example/hudson.html">Tox</a>) and <a href="http://trac.buildbot.net/">Buildbot</a>. I will write-up a more detailed comparison, as related to the specific use-case of SymPy, when I've tried both. Of course, any comments, suggestions or new ideas are very welcome.<br /><br />My second major goal for the community bonding period (ending on the 23rd) is to work on the warnings running with "Python -3" produces. This is an important first step to Python 3 porting, as it will solve some real issues and help me understand the code better. If possible, I will also try to improve code coverage of the test suite (or, alternatively, bother the developers responsible for that piece of code), which is also important for preventing subtle bugs from appearing.<br /><br />Here's to running SymPy on Python 3 (<i>and</i> PyPy!) by the end of the summer!</div><div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/8814696591561172392-6902557110114410157?l=vperic.blogspot.com" alt="" height="1" width="1" /></div></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://vperic.blogspot.com/2011/05/setuppy-gsocblog.html">by Vladimir Perić (noreply@blogger.com) at May 10, 2011 09:02 AM</a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<div class="daygroup">
+<h2>May 09, 2011</h2>
+
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a></h3>
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=147">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/05/09/implementation-details-and-code-structure/">Implementation details and code structure</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>I think the code should be organised as follows:</p>
+<ul>
+<li>
+<pre>sympy/functions/special/bessel.py</pre>
+<p>To this file I will add classes representing the Bessel type function families. (The file aready implements spherical integral order bessel functions, which are expressed directly using trigonometric functions.)</p></li>
+<li>
+<pre>sympy/functions/special/hyper.py</pre>
+<p>This new file will contain classes for the Hypergeometric and Meijer G function families. The method _eval_expand_func() will call hyperexpand() (see below) to (try to) write a Hypergeometric or Meijer G function in terms of named special functions. Hypergeometric and Meijer G functions will <em>not</em> expand themselves automatically. The class for Meijer G functions probably also deserves a few helper methods to aid implementation of the integration algorithm (e.g. a method to absorb <img src="http://s0.wp.com/latex.php?latex=z%5E%5Crho&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="z^\rho" class="latex" title="z^\rho" /> factors). I will implement these as need arises. The Hypergeometric function class will also implement some special values (i.e. <img src="http://s0.wp.com/latex.php?latex=F%281%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="F(1)" class="latex" title="F(1)" />, <img src="http://s0.wp.com/latex.php?latex=F%28-1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="F(-1)" class="latex" title="F(-1)" /> etc for sets of parameters where closed formulae exist). Only the simplest cases will be treated here, since there is vast literature on such “Hypergeometric identities”. If need ever arises, Zeilberger’s algorithm can be used to find many new identities.</p></li>
+<li>
+<pre>sympy/simplify/hyperexpand.py</pre>
+<p>This new file will contain right at the top a “knowledge base” of Hypergeometric (and eventually Meijer G) function identities. This should be in particularly readable form, so that new identities can be added easily. The rest of the file will process this knowledgebase to create the data structures necessary for the function expansion algorithm (at module load time), and actually implement the hyperexpand() function that does the rewriting of Hypergeometric and Meijer G functions in terms of known special functions.</p></li>
+<li>
+<pre>sympy/integrals/meijer.py</pre>
+<p>This new file will implement a function meijerint() that tries to do definite integration using the Meijer G function transform. An important part of this is the re-writing of essentially arbitrary functions in terms of Meijer G functions. I think this should be in this file, since it essentially amounts to computing Mellin transforms, i.e. is tightly coupled to integration. The rewrite code will re-use the knowledge base from hyperexpand.py.</p></li>
+<li>
+<pre>sympy/integrals/integrals.py</pre>
+<p>The function integrate() will be changed to call meijerint() for definite integrals, if everything else failed.</p></li>
+</ul>
+<p>I will also implement randomised unit tests, and add numerical tests for all function transformations and knowledge base entries.</p>
+<p>Later on more classes of special functions will be added, and the knowledge base will be extended.</p>
+<p>I intend to create my first pull request after the addition of the Bessel, Hypergeometric and Meijer G function classes (week one), and the second one after the expansion of Hypergeometric functions works reasonably well (hopefully after week three – but note that there will be my one-week break in this time so the week numbers will shift). The third pull request should include working integration code (hopefully after week four). Planning ahead more seems hard.</p>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/147/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/147/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=147&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/05/09/implementation-details-and-code-structure/">by nessgrh at May 09, 2011 10:25 AM</a>
+</p>
+</div>
+</div>
+
+
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=110">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/05/09/finding-meijer-g-function-expressions/">Finding Meijer G function expressions</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>Similarly to the Hypergeometric case, Meijer G functions should also be expressed in terms of named special functions when possible. The ideas for doing this are very similar to the Hypergeometric case, just more involved since there are many more indices. I will explain in this post why initially not much of an algorithm is needed, and will later expand on what can be done if we really need to.</p>
+<p>So first of all the Meijer G function is defined as an inverse Mellin transform. The standard notation is fairly idiosyncratic. In Sympy we should probably nevertheless stick to it. However for this post let me use the following notation:</p>
+<ul>
+<li><img src="http://s0.wp.com/latex.php?latex=G%5Cleft%28%7B%7Ba_m%2C+b_n%7D+%5Catop+%7Bc_p%2C+d_q%7D%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%5Cfrac%7B1%7D%7B2+%5Cpi+%5Ci%7D+%5Cint_L+%5Cfrac%7B%5Cprod_%7Bk%3D1%7D%5Em+%5CGamma%281-a_k+%2B+s%29+%5C%2C+%5Cprod_%7Bk%3D1%7D%5En+%5CGamma%28b_k+-+s%29%7D%7B%5Cprod_%7Bk%3D1%7D%5Ep+%5CGamma%281-c_k+%2B+s%29+%5C%2C+%5Cprod_%7Bk%3D1%7D%5En+%5CGamma%28d_k+-+s%29%7D+z%5Es+%5Cmathrm%7Bd%7Ds&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G\left({{a_m, b_n} \atop {c_p, d_q}} \middle| z \right) = \frac{1}{2 \pi \i} \int_L \frac{\prod_{k=1}^m \Gamma(1-a_k + s) \, \prod_{k=1}^n \Gamma(b_k - s)}{\prod_{k=1}^p \Gamma(1-c_k + s) \, \prod_{k=1}^n \Gamma(d_k - s)} z^s \mathrm{d}s" class="latex" title="G\left({{a_m, b_n} \atop {c_p, d_q}} \middle| z \right) = \frac{1}{2 \pi \i} \int_L \frac{\prod_{k=1}^m \Gamma(1-a_k + s) \, \prod_{k=1}^n \Gamma(b_k - s)}{\prod_{k=1}^p \Gamma(1-c_k + s) \, \prod_{k=1}^n \Gamma(d_k - s)} z^s \mathrm{d}s" /></li>
+</ul>
+<p>I won’t describe here what the contour <img src="http://s0.wp.com/latex.php?latex=L&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="L" class="latex" title="L" /> is or under what conditions the integral converges. One important thing is that <img src="http://s0.wp.com/latex.php?latex=L&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="L" class="latex" title="L" /> separates the poles of <img src="http://s0.wp.com/latex.php?latex=%5CGamma%281-a_k+%2B+s%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\Gamma(1-a_k + s)" class="latex" title="\Gamma(1-a_k + s)" /> from those of <img src="http://s0.wp.com/latex.php?latex=%5CGamma%28b_k+-+s%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\Gamma(b_k - s)" class="latex" title="\Gamma(b_k - s)" />, so the <img src="http://s0.wp.com/latex.php?latex=G&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G" class="latex" title="G" /> function is undefined if <img src="http://s0.wp.com/latex.php?latex=a_i+-+b_j+%5Cin+%5Cmathbb%7BZ%7D_%7B%3E0%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i - b_j \in \mathbb{Z}_{&gt;0}" class="latex" title="a_i - b_j \in \mathbb{Z}_{&gt;0}" /> for any <img src="http://s0.wp.com/latex.php?latex=i%2C+j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i, j" class="latex" title="i, j" />.</p>
+<h2>Slater’s Theorem</h2>
+<p>In many cases, a <img src="http://s0.wp.com/latex.php?latex=G&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G" class="latex" title="G" /> function can be expressed in terms of Hypergeometric functions, due to the following:</p>
+<ul>
+<li>Suppose <img src="http://s0.wp.com/latex.php?latex=m+%2B+q+%3C+n+%2B+p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="m + q &lt; n + p" class="latex" title="m + q &lt; n + p" /> or <img src="http://s0.wp.com/latex.php?latex=m%2Bq+%3D+n%2Bp%2C+%7Cz%7C+%3C+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="m+q = n+p, |z| &lt; 1" class="latex" title="m+q = n+p, |z| &lt; 1" />. If <img src="http://s0.wp.com/latex.php?latex=b_i+-+b_j+%5Cnotin+%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_i - b_j \notin \mathbb{Z}" class="latex" title="b_i - b_j \notin \mathbb{Z}" /> for all <img src="http://s0.wp.com/latex.php?latex=i+%5Cne+j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i \ne j" class="latex" title="i \ne j" />, then <img src="http://s0.wp.com/latex.php?latex=G%5Cleft%28%7B%7Ba_m%2C+b_n%7D+%5Catop+%7Bc_p%2C+d_q%7D%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%5Csum_%7Bh%3D1%7D%5En+%28%5Ctext%7Bcomplicated+product+of+gamma+functions%7D%29+%5Ctimes+%7B%7D_%7Bm%2Bq%7DF_%7Bn%2Bp-1%7D+%5Cleft%28%7B1%2Bb_h+-+%28a_m%2C+d_q%29%7D+%5Catop+%7B1+%2B+b_h+-%28b_n%2C+c_p%29%2A%7D+%5Cmiddle%7C+%28-1%29%5E%7Bp+-+m%7D+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G\left({{a_m, b_n} \atop {c_p, d_q}} \middle| z \right) = \sum_{h=1}^n (\text{complicated product of gamma functions}) \times {}_{m+q}F_{n+p-1} \left({1+b_h - (a_m, d_q)} \atop {1 + b_h -(b_n, c_p)*} \middle| (-1)^{p - m} z \right)" class="latex" title="G\left({{a_m, b_n} \atop {c_p, d_q}} \middle| z \right) = \sum_{h=1}^n (\text{complicated product of gamma functions}) \times {}_{m+q}F_{n+p-1} \left({1+b_h - (a_m, d_q)} \atop {1 + b_h -(b_n, c_p)*} \middle| (-1)^{p - m} z \right)" />.</li>
+<li>A similar theorem holds with inequalities reversed, and roles of <img src="http://s0.wp.com/latex.php?latex=a_m%2C+b_n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_m, b_n" class="latex" title="a_m, b_n" /> switched.</li>
+</ul>
+<h2>Beyond Slater’s Theorem</h2>
+<p>This reduces our problem to Hypergeometric functions unless two of the <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" /> (or <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" />) differ by an integer. I will assume that this is not a common case. It can sometimes be treated by what is called the “paired index theorem”. Moreover there exists a theory of shift and inverse-shift operators for <img src="http://s0.wp.com/latex.php?latex=G&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G" class="latex" title="G" /> functions. We can thus use much the same algorithm as for Hypergeometric functions. However most functions of interest are already expressible as Hypergeometric functions, so it should be possible to reduce to that case.</p>
+<p>Later in the summer if use cases arise (or just if I get bored and then come up with use cases), I can implement the full algorithm for <img src="http://s0.wp.com/latex.php?latex=G&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G" class="latex" title="G" /> functions as well.</p>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/110/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/110/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=110&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/05/09/finding-meijer-g-function-expressions/">by nessgrh at May 09, 2011 09:58 AM</a>
+</p>
+</div>
+</div>
+
+
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=97">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/05/09/testing-equivalence-of-parameters-algorithmically/">Testing equivalence of parameters algorithmically</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>In the previous post we reduced the problem of finding an expression of a Hypergeometric function to creating a suitably large “knowledge base” of suitable origins, and to find, given a suitable set of parameters <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> an origin <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" />. This post is concerned with the latter problem.</p>
+<p>Let us re-state the definitions. We are given two vectors of complex numbers <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" />. These parameters are called <em>suitable</em> if <img src="http://s0.wp.com/latex.php?latex=a_i+-+b_j+%5Cin+%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i - b_j \in \mathbb{Z}" class="latex" title="a_i - b_j \in \mathbb{Z}" /> implies that <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; b_j" class="latex" title="a_i &lt; b_j" />. We assume <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> are suitable, and also that <img src="http://s0.wp.com/latex.php?latex=a_i+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i \ne 0" class="latex" title="a_i \ne 0" />, <img src="http://s0.wp.com/latex.php?latex=b_j+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j &gt; 0" class="latex" title="b_j &gt; 0" /> for all <img src="http://s0.wp.com/latex.php?latex=i%2C+j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i, j" class="latex" title="i, j" />. All our origins also satisfy the same conditions. To every such set of parameters <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> we associate three invariants:</p>
+<ul>
+<li>For <img src="http://s0.wp.com/latex.php?latex=r+%5Cin+%5B0%2C+1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r \in [0, 1)" class="latex" title="r \in [0, 1)" />, the number <img src="http://s0.wp.com/latex.php?latex=%5Calpha_r&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\alpha_r" class="latex" title="\alpha_r" /> of <img src="http://s0.wp.com/latex.php?latex=a_i+%5Cequiv+r+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i \equiv r \pmod{1}" class="latex" title="a_i \equiv r \pmod{1}" />, and similarly the number <img src="http://s0.wp.com/latex.php?latex=%5Cbeta_r&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\beta_r" class="latex" title="\beta_r" /> of <img src="http://s0.wp.com/latex.php?latex=b_j+%5Cequiv+r+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j \equiv r \pmod{1}" class="latex" title="b_j \equiv r \pmod{1}" />.</li>
+<li>The number <img src="http://s0.wp.com/latex.php?latex=%5Cgamma&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\gamma" class="latex" title="\gamma" /> of <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; 0" class="latex" title="a_i &lt; 0" />.</li>
+</ul>
+<p>We then know that <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> are equivalent to (reachable from) <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> if and only if these invariants all agree.</p>
+<h2>Strictly Numerical Parameters</h2>
+<p>If all of the <img src="http://s0.wp.com/latex.php?latex=a_i%2C+b_j%2C+a_i%5E0%2C+b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i, b_j, a_i^0, b_j^0" class="latex" title="a_i, b_j, a_i^0, b_j^0" /> are concretely given, then this leads to an easy efficient algorithm. To every <img src="http://s0.wp.com/latex.php?latex=r+%5Cin+%5B0%2C+1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r \in [0, 1)" class="latex" title="r \in [0, 1)" /> we can associate a tuple <img src="http://s0.wp.com/latex.php?latex=A_r+%3D+%28r%2C+%5Calpha_r%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A_r = (r, \alpha_r)" class="latex" title="A_r = (r, \alpha_r)" /> and similarly a tuple <img src="http://s0.wp.com/latex.php?latex=B_r+%3D+%28r%2C+%5Cbeta_r%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B_r = (r, \beta_r)" class="latex" title="B_r = (r, \beta_r)" />. Given parameters <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> there exist finitely many <img src="http://s0.wp.com/latex.php?latex=r_1+%3C+r_2+%3C+%5Cdots&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r_1 &lt; r_2 &lt; \dots" class="latex" title="r_1 &lt; r_2 &lt; \dots" /> and <img src="http://s0.wp.com/latex.php?latex=s_1+%3C+s_2+%3C+%5Cdots&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="s_1 &lt; s_2 &lt; \dots" class="latex" title="s_1 &lt; s_2 &lt; \dots" /> such that <img src="http://s0.wp.com/latex.php?latex=%5Calpha_r+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\alpha_r &gt; 0" class="latex" title="\alpha_r &gt; 0" /> if and only if <img src="http://s0.wp.com/latex.php?latex=r+%3D+r_k&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r = r_k" class="latex" title="r = r_k" /> for some <img src="http://s0.wp.com/latex.php?latex=k&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="k" class="latex" title="k" />, and similarly <img src="http://s0.wp.com/latex.php?latex=%5Cbeta_r+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\beta_r &gt; 0" class="latex" title="\beta_r &gt; 0" /> if and only if <img src="http://s0.wp.com/latex.php?latex=r+%3D+s_k&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r = s_k" class="latex" title="r = s_k" /> for some <img src="http://s0.wp.com/latex.php?latex=k&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="k" class="latex" title="k" />. We can thus pack all invariants of <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> into a single tuple: <img src="http://s0.wp.com/latex.php?latex=C%28a_p%2C+b_q%29+%3D+%28%5Cgamma%2C+A_%7Br_1%7D%2C+A_%7Br_2%7D%2C+%5Cdots%2C+B_%7Bs_1%7D%2C+B_%7Bs_2%7D%2C+%5Cdots%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="C(a_p, b_q) = (\gamma, A_{r_1}, A_{r_2}, \dots, B_{s_1}, B_{s_2}, \dots)" class="latex" title="C(a_p, b_q) = (\gamma, A_{r_1}, A_{r_2}, \dots, B_{s_1}, B_{s_2}, \dots)" /></p>
+<p>Thus from our knowledge base we simply assemble a python dictionary that is indexed by the invariant <img src="http://s0.wp.com/latex.php?latex=C&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="C" class="latex" title="C" />. In this way strictly numerical parameters can be settled very quickly and easily.</p>
+<h2>Parametric Hypergeometric Formulae</h2>
+<p>In particular for low orders, there are often parametric formulae for Hypergeometric functions, like this:</p>
+<ul>
+<li><img src="http://s0.wp.com/latex.php?latex=2%7B%7D_2F_1%5Cleft%28%7B-a%2C+%5Cfrac%7B1%7D%7B2%7D-a%7D+%5Catop+%5Cfrac%7B1%7D%7B2%7D+%5Cmiddle%7C+z%5Cright%29+%3D+%281+%2B+%5Csqrt%7Bz%7D%29%5E%7B2a%7D+%2B+%281-%5Csqrt%7Bz%7D%29%5E%7B2a%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="2{}_2F_1\left({-a, \frac{1}{2}-a} \atop \frac{1}{2} \middle| z\right) = (1 + \sqrt{z})^{2a} + (1-\sqrt{z})^{2a}" class="latex" title="2{}_2F_1\left({-a, \frac{1}{2}-a} \atop \frac{1}{2} \middle| z\right) = (1 + \sqrt{z})^{2a} + (1-\sqrt{z})^{2a}" /></li>
+<li><img src="http://s0.wp.com/latex.php?latex=%7B%7D_2F_3+%5Cleft%28%7B%28%5Cmu+%2B+%5Cnu+%2B+1%29%2F2%2C+%28%5Cmu+%2B+%5Cnu+%2B+2%29%2F2%7D+%5Catop+%7B%5Cmu+%2B+1%2C+%5Cnu+%2B+1%2C+%5Cmu+%2B+%5Cnu+%2B+1%7D+%5Cmiddle%7C+-z%5E2+%5Cright%29+%3D+%282%2Fz%29%5E%7B%5Cmu+%2B+%5Cnu%7D+%5CGamma%28%5Cmu+%2B+1%29+%5CGamma%28%5Cnu+%2B+1%29+J_%5Cmu%28z%29+J_%5Cnu%28z%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_2F_3 \left({(\mu + \nu + 1)/2, (\mu + \nu + 2)/2} \atop {\mu + 1, \nu + 1, \mu + \nu + 1} \middle| -z^2 \right) = (2/z)^{\mu + \nu} \Gamma(\mu + 1) \Gamma(\nu + 1) J_\mu(z) J_\nu(z)" class="latex" title="{}_2F_3 \left({(\mu + \nu + 1)/2, (\mu + \nu + 2)/2} \atop {\mu + 1, \nu + 1, \mu + \nu + 1} \middle| -z^2 \right) = (2/z)^{\mu + \nu} \Gamma(\mu + 1) \Gamma(\nu + 1) J_\mu(z) J_\nu(z)" /></li>
+</ul>
+<p>Clearly we want to support these kinds of formulae. This seems much harder, though. Part of the difficulty stems from the fact that <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%2F%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mathbb{Q}/\mathbb{Z}" class="latex" title="\mathbb{Q}/\mathbb{Z}" /> is not even a ring, and part of the difficulty stems from the fact that the Hypergeometric function is symmetric in the numerator parameters and in the denominator parameters. The following strategy is the best I could come up with: Given <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> (where the <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> are parametric formulae) we call a choice of numbers for the free variables an <em>instantiation</em> of the parametric formula. So for example <img src="http://s0.wp.com/latex.php?latex=%281%2C+%5Cfrac%7B3%7D%7B2%7D%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="(1, \frac{3}{2})" class="latex" title="(1, \frac{3}{2})" /> would be an instantiation of <img src="http://s0.wp.com/latex.php?latex=%28-a%2C+%5Cfrac%7B1%7D%7B2%7D-a%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="(-a, \frac{1}{2}-a)" class="latex" title="(-a, \frac{1}{2}-a)" /> (here <img src="http://s0.wp.com/latex.php?latex=a+%3D+-1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a = -1" class="latex" title="a = -1" />). Now given <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> , for every <img src="http://s0.wp.com/latex.php?latex=%28%5Csigma%2C+%5Ctau%29+%5Cin+S_%7Bp%7D+%5Ctimes+S_%7Bq%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="(\sigma, \tau) \in S_{p} \times S_{q}" class="latex" title="(\sigma, \tau) \in S_{p} \times S_{q}" /> (where <img src="http://s0.wp.com/latex.php?latex=S_%7Bp%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="S_{p}" class="latex" title="S_{p}" /> denotes the symmetric group acting on  <img src="http://s0.wp.com/latex.php?latex=p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p" class="latex" title="p" /> elements), we will try to find all inequivalent instantiations of <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> that satisfy</p>
+<ul>
+<li><img src="http://s0.wp.com/latex.php?latex=a_%7B%5Cpi+i%7D+%5Cequiv+a_i%5E0+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_{\pi i} \equiv a_i^0 \pmod{1}" class="latex" title="a_{\pi i} \equiv a_i^0 \pmod{1}" /> for all <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" />,</li>
+<li><img src="http://s0.wp.com/latex.php?latex=b_%7B%5Ctau+j%7D+%5Cequiv+b_j%5E0+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_{\tau j} \equiv b_j^0 \pmod{1}" class="latex" title="b_{\tau j} \equiv b_j^0 \pmod{1}" /> for all <img src="http://s0.wp.com/latex.php?latex=j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="j" class="latex" title="j" />.</li>
+</ul>
+<p>We then instantiate all of these formulae, and run the algorithm for numerical parameters on the instantiations.</p>
+<p>It remains to find a way to solve the above system of equations. Here we make additional assumptions. First of all we will assume all formulae are <em>linear</em> in the free parameters. The formulae found in tables are all of this form. Moreover, they have the property that for every free parameter <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> there exists at least one entry in the vector <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> (or <img src="http://s0.wp.com/latex.php?latex=b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q" class="latex" title="b_q" />) containing <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> as the <em>only</em> free symbol. We will use this entry to make an initial guess of the value of <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" />, and then see what other values we should try. Thus to find the values of <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> to try, do the following:</p>
+<ul>
+<li>Find the least common multiple <img src="http://s0.wp.com/latex.php?latex=l&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="l" class="latex" title="l" /> of all denominators of coefficients of <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> appearing in the equations.</li>
+<li>Of all entries that isolate <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" />, find the one in which <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> appears with largest denominator, say <img src="http://s0.wp.com/latex.php?latex=m&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="m" class="latex" title="m" />.</li>
+<li>The right-hand side of the equation corresponding to that entry determines <img src="http://s0.wp.com/latex.php?latex=%5Cmu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu" class="latex" title="\mu" /> up to multiples of <img src="http://s0.wp.com/latex.php?latex=m&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="m" class="latex" title="m" />. Pick an initial choice <img src="http://s0.wp.com/latex.php?latex=%5Cmu_0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu_0" class="latex" title="\mu_0" />.</li>
+<li>Let <img src="http://s0.wp.com/latex.php?latex=r+%3D+%5Cfrac%7Bl%7D%7Bm%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r = \frac{l}{m}" class="latex" title="r = \frac{l}{m}" />. Try also <img src="http://s0.wp.com/latex.php?latex=%5Cmu_0+%2B+m&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu_0 + m" class="latex" title="\mu_0 + m" />, <img src="http://s0.wp.com/latex.php?latex=%5Cmu_0+%2B+2m&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu_0 + 2m" class="latex" title="\mu_0 + 2m" />, and so on, up to <img src="http://s0.wp.com/latex.php?latex=%5Cmu_0+%2B+%28r-1%29m&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mu_0 + (r-1)m" class="latex" title="\mu_0 + (r-1)m" />.</li>
+</ul>
+<p>I think this should yield all possible solutions (and a lot of spurious ones). We then run these steps for all free parameters, and try all combinations of all possible solutions, and all permutations. Evidently this leads to combinatorial explosion, but it is important to keep in mind that the formulae we will be working with have <img src="http://s0.wp.com/latex.php?latex=%5Cle+3&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\le 3" class="latex" title="\le 3" /> free parameters and very small denominators. Efficient code will still be important.</p>
+<h2>Finding Expressions for Hypergeometric Functions with Parameters</h2>
+<p>This is a different notion from the above: what if we want to find a formula for a Hypergeometric function where the <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> <em>themselves</em> contain free symbols? This can happen when trying to evaluate general integrals (involving say the general order <img src="http://s0.wp.com/latex.php?latex=%5Cnu&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\nu" class="latex" title="\nu" /> Bessel function), or when computing transforms (e.g. the Laplace transform). Clearly none of the “concrete” formulae are of help here. So we can only try to find an instantiation of some parametric Hypergeometric formula from which we can reach the function we are interested in in a finite number of steps independent of the free symbols. Clearly there are no huge tricks we can play here. We will just assume that everything that is not obviously congruent mod 1 is “generically incongruent” and return formulae that are valid for almost all values of the free parameters. With this in mind, running the above algorithm should also work in the case of free symbols.</p>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/97/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/97/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=97&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/05/09/testing-equivalence-of-parameters-algorithmically/">by nessgrh at May 09, 2011 08:29 AM</a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<div class="daygroup">
+<h2>May 07, 2011</h2>
+
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a></h3>
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=29">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/05/07/finding-hypergeometric-function-expressions/">Finding hypergeometric function expressions</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>The core of the new code will be algorithms for expressing Hypergeometric and Meijer G functions in terms of known special functions. This is fairly complicated, so let me use this blog post to order my thoughts on the Hypergeometric case. The Meijer G case is fairly similar, there are just more indices to keep track of and more possible transformations, I’ll describe this in a later post.</p>
+<p>Most of this post is based on the paper by Kelly Roach.</p>
+<p>So first of all the Hypergeometric function is initially defined as a series: <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%5Csum_%7Bn%3D0%7D%5E%5Cinfty+%5Cfrac%7B%28a_1%29_n+%5Cdots+%28a_p%29_n%7D%7B%28b_1%29_n+%5Cdots+%28b_q%29_n%7D+%5Cfrac%7Bz%5En%7D%7Bn%21%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = \sum_{n=0}^\infty \frac{(a_1)_n \dots (a_p)_n}{(b_1)_n \dots (b_q)_n} \frac{z^n}{n!}" class="latex" title="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = \sum_{n=0}^\infty \frac{(a_1)_n \dots (a_p)_n}{(b_1)_n \dots (b_q)_n} \frac{z^n}{n!}" />, where <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> and <img src="http://s0.wp.com/latex.php?latex=b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q" class="latex" title="b_q" /> represent vectors of respectively <img src="http://s0.wp.com/latex.php?latex=p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p" class="latex" title="p" /> and <img src="http://s0.wp.com/latex.php?latex=q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="q" class="latex" title="q" /> complex parameters, and <img src="http://s0.wp.com/latex.php?latex=%28a%29_n+%3D+a%28a%2B1%29%5Cdots%28a%2Bn-1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="(a)_n = a(a+1)\dots(a+n-1)" class="latex" title="(a)_n = a(a+1)\dots(a+n-1)" />. This converges in some disc if <img src="http://s0.wp.com/latex.php?latex=p+%5Cle+q%2B1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p \le q+1" class="latex" title="p \le q+1" /> and none of the <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" /> is a negative integer (it also converges in some other cases if one of the <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" /> is a non-positive integer). Notice that the Hypergeometric function is symmetric in all numerator parameters (the <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" />), and also in all denominator parameters (the <img src="http://s0.wp.com/latex.php?latex=b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q" class="latex" title="b_q" />).</p>
+<p>It turns out that there are certain differential operators that can change the <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> and <img src="http://s0.wp.com/latex.php?latex=p_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p_q" class="latex" title="p_q" /> parameters by integers. If a sequence of such operators is known that converts the set of indices <img src="http://s0.wp.com/latex.php?latex=a_r%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_r^0" class="latex" title="a_r^0" /> and <img src="http://s0.wp.com/latex.php?latex=b_s%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_s^0" class="latex" title="b_s^0" /> into <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> and <img src="http://s0.wp.com/latex.php?latex=b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q" class="latex" title="b_q" />, then we shall say the pair <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is <em>reachable</em> from <img src="http://s0.wp.com/latex.php?latex=a_r%5E0%2C+b_s%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_r^0, b_s^0" class="latex" title="a_r^0, b_s^0" />. Our general strategy is thus as follows: given a set <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> of parameters, try to look up an <em>origin</em> <img src="http://s0.wp.com/latex.php?latex=a_r%5E0%2C+b_s%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_r^0, b_s^0" class="latex" title="a_r^0, b_s^0" /> for which we know an expression, and then apply the sequence of differential operators to the known expression to find an expression for the Hypergeometric function we are interested in.</p>
+<h2>Notation</h2>
+<p>In the following, the symbol <img src="http://s0.wp.com/latex.php?latex=a&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a" class="latex" title="a" /> will always denote a numerator parameter and the symbol <img src="http://s0.wp.com/latex.php?latex=b&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b" class="latex" title="b" /> will always denote a denominator parameter. The subscripts <img src="http://s0.wp.com/latex.php?latex=p%2C+q%2C+r%2C+s&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p, q, r, s" class="latex" title="p, q, r, s" /> denote <em>vectors</em> of that length, so e.g. <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> denotes a vector of <img src="http://s0.wp.com/latex.php?latex=p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p" class="latex" title="p" /> numerator parameters. The subscripts <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" /> and <img src="http://s0.wp.com/latex.php?latex=j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="j" class="latex" title="j" /> denote “running indices”, so they should usually be used in conjuction with a “for all <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" />“. E.g. <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+4&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; 4" class="latex" title="a_i &lt; 4" /> for all <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" />. Uppercase subscripts <img src="http://s0.wp.com/latex.php?latex=I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="I" class="latex" title="I" /> and <img src="http://s0.wp.com/latex.php?latex=J&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="J" class="latex" title="J" /> denote a chosen, fixed index. So for example <img src="http://s0.wp.com/latex.php?latex=a_I+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I &gt; 0" class="latex" title="a_I &gt; 0" /> is true if the inequality holds for the one index <img src="http://s0.wp.com/latex.php?latex=I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="I" class="latex" title="I" /> we are currently interested in.</p>
+<h2>Incrementing and decrementing indices</h2>
+<p>Suppose <img src="http://s0.wp.com/latex.php?latex=a_i+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i \ne 0" class="latex" title="a_i \ne 0" />. Set <img src="http://s0.wp.com/latex.php?latex=A%28a_i%29+%3D+%5Cfrac%7Bz%7D%7Ba_i%7D%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D%2B1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_i) = \frac{z}{a_i}\frac{\mathrm{d}}{dz}+1" class="latex" title="A(a_i) = \frac{z}{a_i}\frac{\mathrm{d}}{dz}+1" />. It is then easy to show that <img src="http://s0.wp.com/latex.php?latex=A%28a_i%29+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%2B+e_i+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_i) {}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_p F_q\left({a_p + e_i \atop b_q} \middle| z \right)" class="latex" title="A(a_i) {}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_p F_q\left({a_p + e_i \atop b_q} \middle| z \right)" />, where <img src="http://s0.wp.com/latex.php?latex=e_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="e_i" class="latex" title="e_i" /> is the i-th unit vector. Similarly for <img src="http://s0.wp.com/latex.php?latex=b_j+%5Cne+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j \ne 1" class="latex" title="b_j \ne 1" /> we set <img src="http://s0.wp.com/latex.php?latex=B%28b_j%29+%3D+%5Cfrac%7Bz%7D%7Bb_j-1%7D+%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D%2B1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_j) = \frac{z}{b_j-1} \frac{\mathrm{d}}{dz}+1" class="latex" title="B(b_j) = \frac{z}{b_j-1} \frac{\mathrm{d}}{dz}+1" /> and find <img src="http://s0.wp.com/latex.php?latex=B%28b_j%29+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q+-+e_i%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_j) {}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_p F_q\left({a_p \atop b_q - e_i} \middle| z \right)" class="latex" title="B(b_j) {}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_p F_q\left({a_p \atop b_q - e_i} \middle| z \right)" />. Thus we can increment upper and decrement lower indices at will, as long as we don’t go through zero. The <img src="http://s0.wp.com/latex.php?latex=A%28a_i%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_i)" class="latex" title="A(a_i)" /> and <img src="http://s0.wp.com/latex.php?latex=B%28b_j%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_j)" class="latex" title="B(b_j)" /> are called <em>shift operators</em>.</p>
+<p>It is also easy to show that <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%5Cfrac%7Ba_1+%5Cdots+a_p%7D%7Bb_1+%5Cdots+b_q%7D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%2B+1+%5Catop+b_q+%2B+1%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{\mathrm{d}}{dz} {}_p F_q\left({a_p \atop b_q} \middle| z \right) = \frac{a_1 \dots a_p}{b_1 \dots b_q} {}_p F_q\left({a_p + 1 \atop b_q + 1} \middle| z \right)" class="latex" title="\frac{\mathrm{d}}{dz} {}_p F_q\left({a_p \atop b_q} \middle| z \right) = \frac{a_1 \dots a_p}{b_1 \dots b_q} {}_p F_q\left({a_p + 1 \atop b_q + 1} \middle| z \right)" />, where <img src="http://s0.wp.com/latex.php?latex=a_p+%2B+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p + 1" class="latex" title="a_p + 1" /> is the vector <img src="http://s0.wp.com/latex.php?latex=a_1+%2B+1%2C+a_2+%2B+1%2C+%5Cdots&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_1 + 1, a_2 + 1, \dots" class="latex" title="a_1 + 1, a_2 + 1, \dots" /> and similarly for <img src="http://s0.wp.com/latex.php?latex=b_q+%2B+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q + 1" class="latex" title="b_q + 1" />. Combining this with the shift operators,  we arrive at one form of the Hypergeometric differential equation: <img src="http://s0.wp.com/latex.php?latex=%5Cleft%5B+%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%5Cprod_%7Bj%3D1%7D%5Eq+B%28b_j%29+-+%5Cfrac%7Ba_1+%5Cdots+a_p%7D%7B%28b_1-1%29+%5Cdots+%28b_q-1%29%7D+%5Cprod_%7Bi%3D1%7D%5Ep+A%28a_i%29+%5Cright%5D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\left[ \frac{\mathrm{d}}{dz} \prod_{j=1}^q B(b_j) - \frac{a_1 \dots a_p}{(b_1-1) \dots (b_q-1)} \prod_{i=1}^p A(a_i) \right] {}_p F_q\left({a_p \atop b_q} \middle| z \right) = 0" class="latex" title="\left[ \frac{\mathrm{d}}{dz} \prod_{j=1}^q B(b_j) - \frac{a_1 \dots a_p}{(b_1-1) \dots (b_q-1)} \prod_{i=1}^p A(a_i) \right] {}_p F_q\left({a_p \atop b_q} \middle| z \right) = 0" />. This holds if all shift operators are defined, i.e. if no <img src="http://s0.wp.com/latex.php?latex=a_i+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i = 0" class="latex" title="a_i = 0" /> and no <img src="http://s0.wp.com/latex.php?latex=b_j+%3D+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j = 1" class="latex" title="b_j = 1" />. Clearing denominators and multiplying through by z we arrive at the following equation: <img src="http://s0.wp.com/latex.php?latex=%5Cleft%5B+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%5Cprod_%7Bj%3D1%7D%5Eq+%5Cleft%28z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%2B+b_j-1+%5Cright%29+-+z+%5Cprod_%7Bi%3D1%7D%5Ep+%5Cleft%28+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+%2B+a_i+%5Cright%29+%5Cright%5D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z%5Cright%29+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\left[ z\frac{\mathrm{d}}{dz} \prod_{j=1}^q \left(z\frac{\mathrm{d}}{dz} + b_j-1 \right) - z \prod_{i=1}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right) \right] {}_p F_q\left({a_p \atop b_q} \middle| z\right) = 0" class="latex" title="\left[ z\frac{\mathrm{d}}{dz} \prod_{j=1}^q \left(z\frac{\mathrm{d}}{dz} + b_j-1 \right) - z \prod_{i=1}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right) \right] {}_p F_q\left({a_p \atop b_q} \middle| z\right) = 0" />. Even though our derivation does not show it, it can be checked that this equation holds whenever the <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q" class="latex" title="{}_p F_q" /> is defined.</p>
+<p>Notice that, under suitable conditions on <img src="http://s0.wp.com/latex.php?latex=a_I%2C+b_J&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I, b_J" class="latex" title="a_I, b_J" />, each of the operators <img src="http://s0.wp.com/latex.php?latex=A%28a_i%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_i)" class="latex" title="A(a_i)" />, <img src="http://s0.wp.com/latex.php?latex=B%28b_j%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_j)" class="latex" title="B(b_j)" /> and <img src="http://s0.wp.com/latex.php?latex=z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="z\frac{\mathrm{d}}{\mathrm{d}z}" class="latex" title="z\frac{\mathrm{d}}{\mathrm{d}z}" /> can be expressed in terms of <img src="http://s0.wp.com/latex.php?latex=A%28a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_I)" class="latex" title="A(a_I)" /> or <img src="http://s0.wp.com/latex.php?latex=B%28b_J%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_J)" class="latex" title="B(b_J)" />. Our next aim is to write the Hypergeometric differential equation as follows: <img src="http://s0.wp.com/latex.php?latex=%5BX+A%28a_I%29+-+b%5D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z%5Cright%29+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="[X A(a_I) - b] {}_p F_q\left({a_p \atop b_q} \middle| z\right) = 0" class="latex" title="[X A(a_I) - b] {}_p F_q\left({a_p \atop b_q} \middle| z\right) = 0" />, for some operator <img src="http://s0.wp.com/latex.php?latex=X&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="X" class="latex" title="X" /> to be determined. If <img src="http://s0.wp.com/latex.php?latex=b+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b \ne 0" class="latex" title="b \ne 0" />, then we can write this as <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B-1%7D%7Bb%7D+X+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%2B+e_I+%5Catop+b_q%7D+%5Cmiddle%7C+z%5Cright%29+%3D+%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{-1}{b} X {}_p F_q\left({a_p + e_I \atop b_q} \middle| z\right) = {}_p F_q\left({a_p \atop b_q} \middle| z\right)" class="latex" title="\frac{-1}{b} X {}_p F_q\left({a_p + e_I \atop b_q} \middle| z\right) = {}_p F_q\left({a_p \atop b_q} \middle| z\right)" />, and so <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B-1%7D%7Bb%7DX&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{-1}{b}X" class="latex" title="\frac{-1}{b}X" /> undoes the shifting of <img src="http://s0.wp.com/latex.php?latex=A%28a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_I)" class="latex" title="A(a_I)" />, whence it will be called an <em>inverse-shift operator</em>.</p>
+<p>Now <img src="http://s0.wp.com/latex.php?latex=A%28a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_I)" class="latex" title="A(a_I)" /> exists if <img src="http://s0.wp.com/latex.php?latex=a_I+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I \ne 0" class="latex" title="a_I \ne 0" />, and then <img src="http://s0.wp.com/latex.php?latex=z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+%3D+a_I+A%28a_I%29+-+a_I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="z\frac{\mathrm{d}}{\mathrm{d}z} = a_I A(a_I) - a_I" class="latex" title="z\frac{\mathrm{d}}{\mathrm{d}z} = a_I A(a_I) - a_I" />. Observe also that all the operators <img src="http://s0.wp.com/latex.php?latex=A%28a_i%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_i)" class="latex" title="A(a_i)" />, <img src="http://s0.wp.com/latex.php?latex=B%28b_j%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(b_j)" class="latex" title="B(b_j)" /> and <img src="http://s0.wp.com/latex.php?latex=z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="z\frac{\mathrm{d}}{\mathrm{d}z}" class="latex" title="z\frac{\mathrm{d}}{\mathrm{d}z}" /> commute. We have <img src="http://s0.wp.com/latex.php?latex=%5Cprod_%7Bi%3D1%7D%5Ep+%5Cleft%28+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+%2B+a_i+%5Cright%29+%3D+%5Cleft%28%5Cprod_%7Bi%3D1%2C+i+%5Cne+I%7D%5Ep+%5Cleft%28+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+%2B+a_i+%5Cright%29%5Cright%29+a_I+A%28a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\prod_{i=1}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right) = \left(\prod_{i=1, i \ne I}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right)\right) a_I A(a_I)" class="latex" title="\prod_{i=1}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right) = \left(\prod_{i=1, i \ne I}^p \left( z\frac{\mathrm{d}}{\mathrm{d}z} + a_i \right)\right) a_I A(a_I)" />, so this gives us the first half of <img src="http://s0.wp.com/latex.php?latex=X&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="X" class="latex" title="X" />. The other half does not have such a nice expression. We find <img src="http://s0.wp.com/latex.php?latex=+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%5Cprod_%7Bj%3D1%7D%5Eq+%5Cleft%28z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7Bdz%7D+%2B+b_j-1+%5Cright%29+%3D+%5Cleft%28a_I+A%28a_I%29+-+a_I%5Cright%29+%5Cprod_%7Bj%3D1%7D%5Eq+%5Cleft%28a_I+A%28a_I%29+-+a_I+%2B+b_j+-+1%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt=" z\frac{\mathrm{d}}{dz} \prod_{j=1}^q \left(z\frac{\mathrm{d}}{dz} + b_j-1 \right) = \left(a_I A(a_I) - a_I\right) \prod_{j=1}^q \left(a_I A(a_I) - a_I + b_j - 1\right)" class="latex" title=" z\frac{\mathrm{d}}{dz} \prod_{j=1}^q \left(z\frac{\mathrm{d}}{dz} + b_j-1 \right) = \left(a_I A(a_I) - a_I\right) \prod_{j=1}^q \left(a_I A(a_I) - a_I + b_j - 1\right)" />. Since the first half had no constant term, we infer <img src="http://s0.wp.com/latex.php?latex=b+%3D+-a_I%5Cprod_%7Bj%3D1%7D%5Eq%28b_j+-+1+-a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b = -a_I\prod_{j=1}^q(b_j - 1 -a_I)" class="latex" title="b = -a_I\prod_{j=1}^q(b_j - 1 -a_I)" />.</p>
+<p>This tells us under which conditions we can “un-shift” <img src="http://s0.wp.com/latex.php?latex=A%28a_I%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="A(a_I)" class="latex" title="A(a_I)" />, namely when <img src="http://s0.wp.com/latex.php?latex=a_I+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I \ne 0" class="latex" title="a_I \ne 0" /> and <img src="http://s0.wp.com/latex.php?latex=b+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b \ne 0" class="latex" title="b \ne 0" />. Substituting <img src="http://s0.wp.com/latex.php?latex=a_I+-+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I - 1" class="latex" title="a_I - 1" /> for <img src="http://s0.wp.com/latex.php?latex=a_I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I" class="latex" title="a_I" /> then tells us under what conditions we can <em>decrement</em> the index <img src="http://s0.wp.com/latex.php?latex=a_I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I" class="latex" title="a_I" />. Doing a similar analysis for <img src="http://s0.wp.com/latex.php?latex=B%28a_J%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B(a_J)" class="latex" title="B(a_J)" />, we arrive at the following rules:</p>
+<ul>
+<li>An index <img src="http://s0.wp.com/latex.php?latex=a_I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I" class="latex" title="a_I" /> can be decremented if <img src="http://s0.wp.com/latex.php?latex=a_I+%5Cne+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I \ne 1" class="latex" title="a_I \ne 1" /> and <img src="http://s0.wp.com/latex.php?latex=a_I+%5Cne+b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I \ne b_j" class="latex" title="a_I \ne b_j" /> for all <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" />.</li>
+<li>An index <img src="http://s0.wp.com/latex.php?latex=b_J&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_J" class="latex" title="b_J" /> can be incremented if <img src="http://s0.wp.com/latex.php?latex=b_J+%5Cne+-1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_J \ne -1" class="latex" title="b_J \ne -1" /> and <img src="http://s0.wp.com/latex.php?latex=b_J+%5Cne+a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_J \ne a_i" class="latex" title="b_J \ne a_i" /> for all <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" />.</li>
+</ul>
+<p>Combined with the conditions (stated above) for the existence of shift operators, we have thus established the rules of the game!</p>
+<h2>Reduction of Order</h2>
+<p>Notice that, quite trivially, if <img src="http://s0.wp.com/latex.php?latex=a_I+%3D+b_J&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I = b_J" class="latex" title="a_I = b_J" />, we have <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%7B%7D_%7Bp-1%7D+F_%7Bq-1%7D%5Cleft%28%7Ba_p%5E%2A+%5Catop+b_q%5E%2A%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_{p-1} F_{q-1}\left({a_p^* \atop b_q^*} \middle| z \right)" class="latex" title="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = {}_{p-1} F_{q-1}\left({a_p^* \atop b_q^*} \middle| z \right)" />, where <img src="http://s0.wp.com/latex.php?latex=a_p%5E%2A&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^*" class="latex" title="a_p^*" /> means <img src="http://s0.wp.com/latex.php?latex=a_p&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p" class="latex" title="a_p" /> with <img src="http://s0.wp.com/latex.php?latex=a_I&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I" class="latex" title="a_I" /> omitted, and similarly for <img src="http://s0.wp.com/latex.php?latex=b_q%5E%2A&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_q^*" class="latex" title="b_q^*" />. We call this reduction of order.</p>
+<p>In fact, we can do even better. If <img src="http://s0.wp.com/latex.php?latex=a_I+-+b_J+%5Cin+%5Cmathbb%7BZ%7D_%7B%3E0%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I - b_J \in \mathbb{Z}_{&gt;0}" class="latex" title="a_I - b_J \in \mathbb{Z}_{&gt;0}" />, then it is easy to see that <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B%28a_I%29_n%7D%7B%28b_J%29_n%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{(a_I)_n}{(b_J)_n}" class="latex" title="\frac{(a_I)_n}{(b_J)_n}" /> is actually a polynomial in <img src="http://s0.wp.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" />. It is also easy to see that <img src="http://s0.wp.com/latex.php?latex=%28z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D%29%5Ek+z%5En+%3D+n%5Ek+z%5En&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="(z\frac{\mathrm{d}}{\mathrm{d}z})^k z^n = n^k z^n" class="latex" title="(z\frac{\mathrm{d}}{\mathrm{d}z})^k z^n = n^k z^n" />. Combining these two remarks we find:</p>
+<ul>
+<li>If <img src="http://s0.wp.com/latex.php?latex=a_I+-+b_J+%5Cin+%5Cmathbb%7BZ%7D_%7B%3E0%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I - b_J \in \mathbb{Z}_{&gt;0}" class="latex" title="a_I - b_J \in \mathbb{Z}_{&gt;0}" />, then there exists a polynomial <img src="http://s0.wp.com/latex.php?latex=p%28n%29+%3D+p_0+%2B+p_1+n+%2B+%5Cdots&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="p(n) = p_0 + p_1 n + \dots" class="latex" title="p(n) = p_0 + p_1 n + \dots" /> (of degree <img src="http://s0.wp.com/latex.php?latex=a_I+-+b_J&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_I - b_J" class="latex" title="a_I - b_J" />) such that <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B%28a_I%29_n%7D%7B%28b_J%29_n%7D+%3D+p%28n%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{(a_I)_n}{(b_J)_n} = p(n)" class="latex" title="\frac{(a_I)_n}{(b_J)_n} = p(n)" /> and <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+%5Cleft%28p_0+%2B+p_1+z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+%2B+p_2+%5Cleft%28z%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D%5Cright%29%5E2+%2B+%5Cdots+%5Cright%29+%7B%7D_%7Bp-1%7D+F_%7Bq-1%7D%5Cleft%28%7Ba_p%5E%2A+%5Catop+b_q%5E%2A%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = \left(p_0 + p_1 z\frac{\mathrm{d}}{\mathrm{d}z} + p_2 \left(z\frac{\mathrm{d}}{\mathrm{d}z}\right)^2 + \dots \right) {}_{p-1} F_{q-1}\left({a_p^* \atop b_q^*} \middle| z \right)" class="latex" title="{}_p F_q\left({a_p \atop b_q} \middle| z \right) = \left(p_0 + p_1 z\frac{\mathrm{d}}{\mathrm{d}z} + p_2 \left(z\frac{\mathrm{d}}{\mathrm{d}z}\right)^2 + \dots \right) {}_{p-1} F_{q-1}\left({a_p^* \atop b_q^*} \middle| z \right)" />.</li>
+</ul>
+<p>Thus any set of parameters <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is reachable from a set of parameters <img src="http://s0.wp.com/latex.php?latex=c_r%2C+d_s&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c_r, d_s" class="latex" title="c_r, d_s" /> where <img src="http://s0.wp.com/latex.php?latex=c_i+-+d_j+%5Cin+%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c_i - d_j \in \mathbb{Z}" class="latex" title="c_i - d_j \in \mathbb{Z}" /> implies <img src="http://s0.wp.com/latex.php?latex=c_i+%3C+d_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c_i &lt; d_j" class="latex" title="c_i &lt; d_j" />. Such a set of parameters <img src="http://s0.wp.com/latex.php?latex=c_r%2C+d_s&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c_r, d_s" class="latex" title="c_r, d_s" /> is called <em>suitable</em>. Our database of known formulae should only contain suitable origins. The reasons are twofold: firstly, working from suitable origins is easier, and secondly, a formula for a non-suitable origin can be deduced from a lower order formula, and we should put this one into the database instead.</p>
+<h2>Moving Around in the Parameter Space</h2>
+<p>It remains to investigate the following question: suppose <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> and <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> are both suitable, and also <img src="http://s0.wp.com/latex.php?latex=a_i+-+a_i%5E0+%5Cin+%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i - a_i^0 \in \mathbb{Z}" class="latex" title="a_i - a_i^0 \in \mathbb{Z}" />, <img src="http://s0.wp.com/latex.php?latex=b_j+-+b_j%5E0+%5Cin+%5Cmathbb%7BZ%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j - b_j^0 \in \mathbb{Z}" class="latex" title="b_j - b_j^0 \in \mathbb{Z}" />. When is <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> reachable from <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" />? It is clear that we can treat all parameters independently that are incongruent mod 1. So assume that <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" /> and <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" /> are congruent to <img src="http://s0.wp.com/latex.php?latex=r&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r" class="latex" title="r" /> mod 1, for all <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" /> and <img src="http://s0.wp.com/latex.php?latex=j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="j" class="latex" title="j" />. The same then follows for <img src="http://s0.wp.com/latex.php?latex=a_i%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0" class="latex" title="a_i^0" /> and <img src="http://s0.wp.com/latex.php?latex=b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j^0" class="latex" title="b_j^0" />.</p>
+<p>If <img src="http://s0.wp.com/latex.php?latex=r+%5Cne+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r \ne 0" class="latex" title="r \ne 0" />, then <strong>any</strong> such <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is reachable from <strong>any</strong> <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" />. To see this notice that there exist constants <img src="http://s0.wp.com/latex.php?latex=c%2C+c%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c, c^0" class="latex" title="c, c^0" />, congruent mod 1, such that <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+c+%3C+b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; c &lt; b_j" class="latex" title="a_i &lt; c &lt; b_j" /> for all <img src="http://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="i" class="latex" title="i" /> and <img src="http://s0.wp.com/latex.php?latex=j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="j" class="latex" title="j" />, and similarly <img src="http://s0.wp.com/latex.php?latex=a_i%5E0+%3C+c%5E0+%3C+b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0 &lt; c^0 &lt; b_j^0" class="latex" title="a_i^0 &lt; c^0 &lt; b_j^0" />. If <img src="http://s0.wp.com/latex.php?latex=n+%3D+c+-+c%5E0+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n = c - c^0 &gt; 0" class="latex" title="n = c - c^0 &gt; 0" /> then we first inverse-shift all the <img src="http://s0.wp.com/latex.php?latex=b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j^0" class="latex" title="b_j^0" /> <img src="http://s0.wp.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" /> times up, and then similarly shift shift up all the <img src="http://s0.wp.com/latex.php?latex=a_i%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0" class="latex" title="a_i^0" /> <img src="http://s0.wp.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" /> times. If <img src="http://s0.wp.com/latex.php?latex=n+%3C+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n &lt; 0" class="latex" title="n &lt; 0" /> then we first inverse-shift down the <img src="http://s0.wp.com/latex.php?latex=a_i%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0" class="latex" title="a_i^0" /> and then shift down the <img src="http://s0.wp.com/latex.php?latex=b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j^0" class="latex" title="b_j^0" />. This reduces to the case <img src="http://s0.wp.com/latex.php?latex=c+%3D+c%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c = c^0" class="latex" title="c = c^0" />. But evidently we can now shift or inverse-shift around the <img src="http://s0.wp.com/latex.php?latex=a_i%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0" class="latex" title="a_i^0" /> arbitrarily so long as we keep them less than <img src="http://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c" class="latex" title="c" />, and similarly for the <img src="http://s0.wp.com/latex.php?latex=b_j%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j^0" class="latex" title="b_j^0" /> so long as we keep them bigger than <img src="http://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="c" class="latex" title="c" />. Thus <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is reachable from <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" />.</p>
+<p>If <img src="http://s0.wp.com/latex.php?latex=r+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r = 0" class="latex" title="r = 0" /> then the problem is slightly more involved. WLOG no parameter is zero. We now have one additional complication: no parameter can ever move through zero. Hence <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is reachable from <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> if and only if the number of <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; 0" class="latex" title="a_i &lt; 0" /> equals the number of <img src="http://s0.wp.com/latex.php?latex=a_i%5E0+%3C+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i^0 &lt; 0" class="latex" title="a_i^0 &lt; 0" />, and similarly for the <img src="http://s0.wp.com/latex.php?latex=b_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_i" class="latex" title="b_i" /> and <img src="http://s0.wp.com/latex.php?latex=b_i%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_i^0" class="latex" title="b_i^0" />. But in a suitable set of parameters, all <img src="http://s0.wp.com/latex.php?latex=b_j+%3E+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j &gt; 0" class="latex" title="b_j &gt; 0" />! This is because the Hypergeometric function is undefined if one of the <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" /> is a non-positive integer and all <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" /> are smaller than the <img src="http://s0.wp.com/latex.php?latex=b_j&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j" class="latex" title="b_j" />. Hence the number of <img src="http://s0.wp.com/latex.php?latex=b_j+%5Cle+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_j \le 0" class="latex" title="b_j \le 0" /> is always zero.</p>
+<p>We can thus associate to every suitable set of parameters <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" />, where no <img src="http://s0.wp.com/latex.php?latex=a_i+%3D+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i = 0" class="latex" title="a_i = 0" />, the following invariants:</p>
+<ul>
+<li>For every <img src="http://s0.wp.com/latex.php?latex=r+%5Cin+%5B0%2C+1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="r \in [0, 1)" class="latex" title="r \in [0, 1)" /> the number <img src="http://s0.wp.com/latex.php?latex=%5Calpha_r&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\alpha_r" class="latex" title="\alpha_r" /> of parameters <img src="http://s0.wp.com/latex.php?latex=a_i+%5Cequiv+r+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i \equiv r \pmod{1}" class="latex" title="a_i \equiv r \pmod{1}" />, and similarly the number <img src="http://s0.wp.com/latex.php?latex=%5Cbeta_r&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\beta_r" class="latex" title="\beta_r" /> of parameters <img src="http://s0.wp.com/latex.php?latex=b_i+%5Cequiv+r+%5Cpmod%7B1%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="b_i \equiv r \pmod{1}" class="latex" title="b_i \equiv r \pmod{1}" />.</li>
+<li>The number <img src="http://s0.wp.com/latex.php?latex=%5Cgamma&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\gamma" class="latex" title="\gamma" /> of integers <img src="http://s0.wp.com/latex.php?latex=a_i&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i" class="latex" title="a_i" /> with <img src="http://s0.wp.com/latex.php?latex=a_i+%3C+0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_i &lt; 0" class="latex" title="a_i &lt; 0" />.</li>
+</ul>
+<p>The above reasoning shows that <img src="http://s0.wp.com/latex.php?latex=a_p%2C+b_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p, b_q" class="latex" title="a_p, b_q" /> is reachable from <img src="http://s0.wp.com/latex.php?latex=a_p%5E0%2C+b_q%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_p^0, b_q^0" class="latex" title="a_p^0, b_q^0" /> if and only if the invariants <img src="http://s0.wp.com/latex.php?latex=%5Calpha_r%2C+%5Cbeta_r%2C+%5Cgamma&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\alpha_r, \beta_r, \gamma" class="latex" title="\alpha_r, \beta_r, \gamma" /> all agree. Thus in particular “being reachable from” is a symmetric relation on suitable parameters without zeros.</p>
+<h2>Applying the Operators</h2>
+<p>If all goes well then for a given set of parameters we find an origin in our database for which we have a nice formula. We now have to apply (potentially) many differential operators to it. If we do this blindly then the result will be very messy. This is because with Hypergeometric type functions, the derivative is usually expressed as a sum of two contiguous functions. Hence if we compute <img src="http://s0.wp.com/latex.php?latex=N&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="N" class="latex" title="N" /> derivatives, then the answer will involve <img src="http://s0.wp.com/latex.php?latex=2N&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="2N" class="latex" title="2N" /> contiguous functions! This is clearly undesirable. In fact we know from the Hypergeometric differential equation that we need at most <img src="http://s0.wp.com/latex.php?latex=%5Cmax%28p%2C+q%2B1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\max(p, q+1)" class="latex" title="\max(p, q+1)" /> contiguous functions to express all derivatives.</p>
+<p>Hence instead of differentiating blindly, we will work with a <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BC%7D%28z%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mathbb{C}(z)" class="latex" title="\mathbb{C}(z)" />-module basis: for an origin <img src="http://s0.wp.com/latex.php?latex=a_r%5E0%2C+b_s%5E0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a_r^0, b_s^0" class="latex" title="a_r^0, b_s^0" /> we either store (for particularly pretty answers) or compute a set of <img src="http://s0.wp.com/latex.php?latex=N&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="N" class="latex" title="N" /> functions (typically <img src="http://s0.wp.com/latex.php?latex=N+%3D+%5Cmax%28r%2C+s%2B1%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="N = \max(r, s+1)" class="latex" title="N = \max(r, s+1)" />) with the property that the derivative of any of them is a <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BC%7D%28z%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mathbb{C}(z)" class="latex" title="\mathbb{C}(z)" />-linear combination of them. In formulae, we store a vector <img src="http://s0.wp.com/latex.php?latex=B&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B" class="latex" title="B" /> of <img src="http://s0.wp.com/latex.php?latex=N&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="N" class="latex" title="N" /> functions, a matrix <img src="http://s0.wp.com/latex.php?latex=M&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="M" class="latex" title="M" /> and a vector <img src="http://s0.wp.com/latex.php?latex=C&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="C" class="latex" title="C" /> (the latter two with entries in <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BC%7D%28z%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mathbb{C}(z)" class="latex" title="\mathbb{C}(z)" />), with the following properties:</p>
+<ul>
+<li><img src="http://s0.wp.com/latex.php?latex=%7B%7D_r+F_s%5Cleft%28%7Ba_r%5E0+%5Catop+b_s%5E0%7D+%5Cmiddle%7C+z+%5Cright%29+%3D+C+B&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_r F_s\left({a_r^0 \atop b_s^0} \middle| z \right) = C B" class="latex" title="{}_r F_s\left({a_r^0 \atop b_s^0} \middle| z \right) = C B" /></li>
+<li><img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7B%5Cmathrm%7Bd%7D%7D%7B%5Cmathrm%7Bd%7Dz%7D+B+%3D+M+B&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\frac{\mathrm{d}}{\mathrm{d}z} B = M B" class="latex" title="\frac{\mathrm{d}}{\mathrm{d}z} B = M B" />.</li>
+</ul>
+<p>Then we can compute as many derivatives as we want and we will always end up with <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BC%7D%28z%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\mathbb{C}(z)" class="latex" title="\mathbb{C}(z)" />-linear combination of at most <img src="http://s0.wp.com/latex.php?latex=N&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="N" class="latex" title="N" /> special functions.</p>
+<p>As hinted above, <img src="http://s0.wp.com/latex.php?latex=B&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="B" class="latex" title="B" />, <img src="http://s0.wp.com/latex.php?latex=M&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="M" class="latex" title="M" /> and <img src="http://s0.wp.com/latex.php?latex=C&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="C" class="latex" title="C" /> can either all be stored (for particularly pretty answers) or computed from a single <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q" class="latex" title="{}_p F_q" /> formula.</p>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/29/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/29/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=29&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/05/07/finding-hypergeometric-function-expressions/">by nessgrh at May 07, 2011 10:58 PM</a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<div class="daygroup">
 <h2>May 04, 2011</h2>
 
 <div class="channelgroup">
@@ -291,6 +552,140 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
 
 <p class="date">
 <a href="http://fseoane.net/blog/2011/low-level-routines-for-support-vector-machines/">by fabian at April 27, 2011 01:27 PM</a>
+</p>
+</div>
+</div>
+
+
+
+</div>
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a></h3>
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=10">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/04/27/work/">Work</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>Alright, since I don’t have much to say yet, let me use this post to compile a list of things that have to be done before we see the first non-trivial integrals evaluated. I’ll also add random notes on implementation that spring to my mind. I’ll keep updating this.</p>
+<ol>
+<li>Classes to represent functions: Bessel, Hypergeometric, Meijer G
+<ul>
+<li>Make sure the following work: evalf, derivatives, simple limits, basic properties, naive pattern matching, some special values</li>
+<li>Pretty printing.</li>
+</ul>
+</li>
+<li>Framework for simplifying Hypergeometric and Meijer G functions.
+<ul>
+<li>Shift and inverse-shift operators.</li>
+<li>Determining suitable origins and sequences of operators to reach them.</li>
+<li>Implement randomised testing.</li>
+<li>Start the lookup table.</li>
+<li>Possibly need to tweak gamma function simplification code.</li>
+<li>Probably need to find a replacement for naive pattern matching. In any case pattern matching of tuples does not seem to work too well.</li>
+</ul>
+</li>
+<li>Expression of integrands in terms of Meijer G functions.
+<ul>
+<li>Convert to a canonical form and use table lookup.</li>
+</ul>
+</li>
+<li>Extend integration code to use Meijer G function integration theorems.
+<ul>
+<li>Probably need to implement more properties / assumptions in order to be able to check the antecedents of the theorems.</li>
+</ul>
+</li>
+</ol>
+<p>The following are possible extensions of the above work, orthogonal to the main plan of adding new functions:</p>
+<ul>
+<li>Asymptotic expansion of Meijer G (and hence Hypergeometric) functions is possible but complicated.</li>
+<li>Extend class Sum to convert itself into a hypergeometric function if possible.</li>
+<li>The Hypergeometric (and Meijer G) functions are also the general solutions to fairly general ODEs, so the ODE module could also benefit.</li>
+<li>Use Zeilberger’s algorithm to find particular values of hypergeometric functions.</li>
+<li>Use recursive mellin transforms for 3.</li>
+</ul>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/10/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/10/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=10&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/04/27/work/">by nessgrh at April 27, 2011 10:35 AM</a>
+</p>
+</div>
+</div>
+
+
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=7">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/04/27/things-to-keep-in-mind/">Things to keep in mind</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>This is going to be a list of random things I should keep in mind while working on the GSoC project. I’ll keep updating it.</p>
+<ul>
+<li><img src="http://s0.wp.com/latex.php?latex=G&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="G" class="latex" title="G" /> function has a (logarithmic) branch point at the origin</li>
+<li>Gamma function estimates (a la stirling) use a branch cut along the negative reals, e.g. here: <img src="http://s0.wp.com/latex.php?latex=%5CGamma%28z%2Ba%29+%3D+e%5E%7B-z%7D+z%5E%7Bz%2Ba-%5Cfrac%7B1%7D%7B2%7D%7D+%282+%5Cpi%29%5E%7B%5Cfrac%7B1%7D%7B2%7D%7D+%5Cleft%281%2BO%5Cleft%28%5Cfrac%7B1%7D%7Bz%7D%5Cright%29%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\Gamma(z+a) = e^{-z} z^{z+a-\frac{1}{2}} (2 \pi)^{\frac{1}{2}} \left(1+O\left(\frac{1}{z}\right)\right)" class="latex" title="\Gamma(z+a) = e^{-z} z^{z+a-\frac{1}{2}} (2 \pi)^{\frac{1}{2}} \left(1+O\left(\frac{1}{z}\right)\right)" />, for <img src="http://s0.wp.com/latex.php?latex=%7C%5Carg%28z%2Ba%29%7C+%5Cle+%5Cpi+-+%5Cepsilon&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="|\arg(z+a)| \le \pi - \epsilon" class="latex" title="|\arg(z+a)| \le \pi - \epsilon" /> where the implicit constant in <img src="http://s0.wp.com/latex.php?latex=O%5Cleft%28%5Cfrac%7B1%7D%7Bz%7D%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="O\left(\frac{1}{z}\right)" class="latex" title="O\left(\frac{1}{z}\right)" /> depends on <img src="http://s0.wp.com/latex.php?latex=a&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="a" class="latex" title="a" /> and <img src="http://s0.wp.com/latex.php?latex=%5Cepsilon&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\epsilon" class="latex" title="\epsilon" />.</li>
+</ul>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/7/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/7/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=7&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/04/27/things-to-keep-in-mind/">by nessgrh at April 27, 2011 10:23 AM</a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<div class="daygroup">
+<h2>April 26, 2011</h2>
+
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a></h3>
+
+
+<div class="entrygroup" id="http://nessgrh.wordpress.com/?p=1">
+<h4 lang="en"><a href="http://nessgrh.wordpress.com/2011/04/26/hello-world/">Hello world!</a></h4>
+<div class="entry">
+<div class="content" lang="en">
+<p>Testing latex: <img src="http://s0.wp.com/latex.php?latex=%5Csqrt%7Bx%7D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="\sqrt{x}" class="latex" title="\sqrt{x}" /> <img src="http://s0.wp.com/latex.php?latex=%7B%7D_p+F_q%5Cleft%28%7Ba_p+%5Catop+b_q%7D+%5Cmiddle%7C+z+%5Cright%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="{}_p F_q\left({a_p \atop b_q} \middle| z \right)" class="latex" title="{}_p F_q\left({a_p \atop b_q} \middle| z \right)" /></p>
+<p>Testing code:</p>
+<pre class="brush: python;"> for foo in bar: grunzt </pre>
+<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/nessgrh.wordpress.com/1/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/nessgrh.wordpress.com/1/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=1&amp;subd=nessgrh&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://nessgrh.wordpress.com/2011/04/26/hello-world/">by nessgrh at April 26, 2011 04:55 PM</a>
 </p>
 </div>
 </div>
@@ -2822,440 +3217,6 @@ Unfortunately, it seems with my project that we keep running into more and more 
 </div>
 
 
-
-</div>
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://ondrejcertik.blogspot.com/search/label/sympy" title="Ondřej Čertík">Ond&#345;ej &#268;ert&iacute;k</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-6568744196982634289.post-6122266783960777317">
-<h4><a href="http://ondrejcertik.blogspot.com/2010/07/week-july-26-30.html">Week July 26 - 30</a></h4>
-<div class="entry">
-<div class="content">
-This week I have been wrapping up my work at LLNL and trying to generate some comparisons between different approaches to adapt to multiple eigenvectors at once.<br /><br />It turns out that most of the issues are in the way we create the new mesh for the next adaptivity iteration, in particular, how do we choose which candidates to refine. I have tried to converge to the lowest eigenvector (as well as to any other eigenvector too), to the sum of the eigenvectors, to each eigenvector individually and taking the union of the meshes and so on. I have also implemented the uniform p-FEM as well as tried p-FEM and hp-FEM using the approaches I mentioned above.<br /><br />It seems to be crucial to have a good initial mesh, at least for p-FEM. If I use a good mesh and p-adaptivity, I am able to get the best results so far. In principle hp adaptivity should be at least as good, but our current approach doesn't show it yet. Hopefully we'll manage to make it work.<br /><br />Besides that I have also implemented H1 norms for the Function class (based on Fekete points) by calculating coefficients with regards to a FE basis and some other little things.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/6568744196982634289-6122266783960777317?l=ondrejcertik.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://ondrejcertik.blogspot.com/2010/07/week-july-26-30.html">by Ondřej Čertík (noreply@blogger.com) at July 31, 2010 07:49 AM</a>
-</p>
-</div>
-</div>
-
-
-
-</div>
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://asmeurersympy.wordpress.com" title="Aaron Meurer's SymPy Blog">Aaron Meurer</a></h3>
-
-
-<div class="entrygroup" id="http://asmeurersympy.wordpress.com/?p=683">
-<h4 lang="en"><a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">Integration of primitive functions</a></h4>
-<div class="entry">
-<div class="content" lang="en">
-<p><strong>Integration of Primitive Functions</strong></p>
-<p>So this past week, I had another break through in my project.  The <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">first break through</a>, as you may recall, was the completion of the <code>integrate_hyperexponential()</code> function, which allowed for the integration in hyperexponential extensions, including proving the nonexistence of elementary integrals.  Now I have worked my way up to this level on the other major half of the integration algorithm (actually, major third; more on that later): integration of primitive elements.  </p>
-<p>This time, I can refer you to my <a href="http://asmeurersympy.wordpress.com/2010/07/24/the-risch-algorithm-part-2-elementary-functions/">previous blog post</a> for definitions.  The chief thing here is that there is now a function in my <tt>integration3</tt> branch called <code>integrate_primitive()</code>, and it is used primarily for integrating functions with logarithms.</p>
-<p>So, how about some examples?  The first one comes from <a href="http://asmeurersympy.wordpress.com/feed/">Algorithms for computer algebra By Keith O. Geddes, Stephen R. Czapor, George Labahn</a> (example 12.8).  I like it because it contains both exponentials and logarithms, in a way that they do not depend on each other, so it can be integrated with either <code>integrate_primitive()</code> or <code>integrate_hyperexponential()</code>.  In either case, the polynomial part is <img src="http://s0.wp.com/latex.php?latex=%5Cfrac%7Bx%7D%7Bx+%2B+1%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\frac{x}{x + 1}" class="latex" title="\frac{x}{x + 1}" />, so recursively calling the other function is not required.  (for those of you who have been following my <tt>integration3</tt> branch, you may notice that this is blatantly taken from the commit history).</p>
-<p><strong>Hover over the code and click on the left-most, “view source” icon (a paper icon with <tt>&lt; &gt;</tt> over it) to view without breaks.  Opens in a new window.</strong></p>
-<pre class="brush: python;">In [1]: from sympy.integrals.risch import integrate_primitive,
-integrate_hyperexponential
-
-In [2]: f = (x*(x + 1)*((x**2*exp(2*x**2) - log(x + 1)**2)**2 +
-2*x*exp(3*x**2)*(x - (2*x**3 + 2*x**2 + x + 1)*log(x + 1))))/((x +
-1)*log(x + 1)**2 - (x**3 + x**2)*exp(2*x**2))**2
-
-In [3]: f
-Out[3]:
-          ⎛                          2                                                   ⎞
-          ⎜⎛                       2⎞                                                   2⎟
-          ⎜⎜     2           2  2⋅x ⎟        ⎛    ⎛           2      3⎞           ⎞  3⋅x ⎟
-x⋅(1 + x)⋅⎝⎝- log (1 + x) + x ⋅ℯ    ⎠  + 2⋅x⋅⎝x - ⎝1 + x + 2⋅x  + 2⋅x ⎠⋅log(1 + x)⎠⋅ℯ    ⎠
-──────────────────────────────────────────────────────────────────────────────────────────
-                                                                2
-                         ⎛                                    2⎞
-                         ⎜   2                  ⎛ 2    3⎞  2⋅x ⎟
-                         ⎝log (1 + x)⋅(1 + x) - ⎝x  + x ⎠⋅ℯ    ⎠
-
-In [4]: var('t0, t1')
-Out[4]: (t₀, t₁)
-
-In [5]: a, d = map(lambda i: Poly(i, t1), f.subs(exp(x**2),
-t0).subs(log(x + 1), t1).as_numer_denom())
-
-In [6]: a
-Out[6]:
-Poly((x + x**2)*t1**4 + (-2*t0**2*x**3 - 2*t0**2*x**4)*t1**2 +
-(-2*t0**3*x**2 - 4*t0**3*x**3 - 6*t0**3*x**4 - 8*t0**3*x**5 -
-4*t0**3*x**6)*t1 + 2*t0**3*x**3 + 2*t0**3*x**4 + t0* *4*x**5 +
-t0**4*x**6, t1, domain='ZZ[x,t0]')
-
-In [7]: d
-Out[7]: Poly((1 + 2*x + x**2)*t1**4 + (-2*t0**2*x**2 - 4*t0**2*x**3 -
-2*t0**2*x**4)*t1**2 + t0**4*x**4 + 2*t0**4*x**5 + t0**4*x**6, t1,
-domain='ZZ[x,t0]')
-
-In [8]: D = [Poly(1, x), Poly(2*x*t0, t0), Poly(1/(x + 1), t1)]
-
-In [9]: r = integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(x +
-1), lambda x: exp(x**2)])
-
-In [10]: r
-Out[10]:
-⎛   ⎛                ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞        ⎛ 2⎞                                ⎞
-⎜   ⎜                ⎝x ⎠⎟      ⎜                ⎝x ⎠⎟        ⎝x ⎠                ⌠               ⎟
-⎜log⎝log(1 + x) + x⋅ℯ    ⎠   log⎝log(1 + x) - x⋅ℯ    ⎠     x⋅ℯ    ⋅log(1 + x)     ⎮   x           ⎟
-⎜───────────────────────── - ───────────────────────── - ────────────────────── + ⎮ ───── dx, True⎟
-⎜            2                           2                                    2   ⎮ 1 + x         ⎟
-⎜                                                           2           2  2⋅x    ⌡               ⎟
-⎝                                                        log (1 + x) - x ⋅ℯ                       ⎠
-</pre>
-<p>An explanation:  <code>f</code> is the function we are integrating.  Preparsing is not implemented yet, so we have to do it manually in <tt>[5]</tt>.  <tt>[8]</tt> is the list of derivations of the monomials we are working with, <code>[x, t0, t1]</code>, which represent <img src="http://s0.wp.com/latex.php?latex=x&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="x" class="latex" title="x" />, <img src="http://s0.wp.com/latex.php?latex=e%5E%7Bx%5E2%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="e^{x^2}" class="latex" title="e^{x^2}" />, and <img src="http://s0.wp.com/latex.php?latex=%5Clog%7B%28x+%2B+1%29%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\log{(x + 1)}" class="latex" title="\log{(x + 1)}" />, respectively. Because the outermost monomial is a logarithm (primitive), we call <code>integrate_primitive()</code> on it.  The last argument of the function is the back substitution list, in reverse order because that is the order we have to back substitute in.  We can see the result contains an unevaluated Integral.  This is because the recursive calls to integrate over the smaller extensions have not yet been implemented.  In the final version, <code>integrate()</code> will automatically call <code>ratint()</code> in this case on it to give the complete answer.  The second argument of the result, True, indicates that the integral was elementary and that this is the complete integral.</p>
-<p>Because the extensions did not depend on each other, we could have also integrated in <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%2C+%5Clog%7B%28x+%2B+1%29%7D%2C+e%5E%7Bx%5E2%7D%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x, \log{(x + 1)}, e^{x^2})" class="latex" title="\mathbb{Q}(x, \log{(x + 1)}, e^{x^2})" /> instead of <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%2C+e%5E%7Bx%5E2%7D%2C+%5Clog%7B%28x+%2B+1%29%7D%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x, e^{x^2}, \log{(x + 1)})" class="latex" title="\mathbb{Q}(x, e^{x^2}, \log{(x + 1)})" />:</p>
-<pre class="brush: python;">In [11]: a1, d1 = map(lambda i: Poly(i, t0), f.subs(exp(x**2), t0).subs(log(x + 1), t1).as_numer_denom())
-
-In [12]: D1 = [Poly(1, x), Poly(1/(x + 1), t1), Poly(2*x*t0, t0)]
-
-In [13]: r1 = integrate_hyperexponential(a1, d1, D1, [x, t1, t0], [lambda x: exp(x**2), lambda x: log(x + 1)])
-
-In [14]: r1
-Out[14]:
-⎛   ⎛              ⎛ 2⎞⎞      ⎛                ⎛ 2⎞⎞                                                ⎞
-⎜   ⎜log(1 + x)    ⎝x ⎠⎟      ⎜  log(1 + x)    ⎝x ⎠⎟          ⎛ 2⎞                                  ⎟
-⎜log⎜────────── + ℯ    ⎟   log⎜- ────────── + ℯ    ⎟       2  ⎝x ⎠                  ⌠               ⎟
-⎜   ⎝    x             ⎠      ⎝      x             ⎠      x ⋅ℯ    ⋅log(1 + x)       ⎮   x           ⎟
-⎜─────────────────────── - ───────────────────────── + ────────────────────────── + ⎮ ───── dx, True⎟
-⎜           2                          2                                        2   ⎮ 1 + x         ⎟
-⎜                                                             2           3  2⋅x    ⌡               ⎟
-⎝                                                      - x⋅log (1 + x) + x ⋅ℯ                       ⎠
-</pre>
-<p>We can verify by taking the derivative that the results in each case are antiderivatives of the original function, <code>f</code>, even though they appear different.</p>
-<pre class="brush: python;">In [15]: cancel(r[0].diff(x) - f)
-Out[15]: 0
-
-In [16]: cancel(r1[0].diff(x) - f)
-Out[16]: 0
-</pre>
-<p>We can see in each case, the remaining unevaluated <code>Integral</code> was in <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x)" class="latex" title="\mathbb{Q}(x)" /> only, meaning that the recursive call to <code>integrate_hyperexponential()</code> or <code>integrate_primitive()</code>, respectively, would not have been necessary. Finally, we can see that choosing the correct extension to integrate over can make a difference, time wise:</p>
-<pre class="brush: python;">In [17]: %timeit integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(x + 1), lambda x: exp(x**2)])
-1 loops, best of 3: 1.91 s per loop
-
-In [18]: %timeit integrate_hyperexponential(a1, d1, D1, [x, t1, t0], [lambda x: exp(x**2), lambda x: log(x + 1)])
-1 loops, best of 3: 2.63 s per loop
-</pre>
-<p>Just as with the exponential case, the function can prove the integrals are non-elementary. This is the so-called <a href="http://en.wikipedia.org/wiki/Logarithmic_integral">logarithmic integral</a>:</p>
-<pre class="brush: python;">In [19]: f1 = 1/log(x)
-
-In [20]: a, d = map(lambda i: Poly(i, t1), f1.subs(log(x), t1).as_numer_denom())
-
-In [21]: a
-Out[21]: Poly(1, t1, domain='ZZ')
-
-In [22]: d
-Out[22]: Poly(t1, t1, domain='ZZ')
-
-In [23]: integrate_primitive(a, d, [Poly(1, x), Poly(1/x, t1)], [x, t1], [log])
-Out[23]: (0, False)
-</pre>
-<p>The second argument, <code>False</code>, indicates that the integral was non-elementary.  Namely, the function has proven that the function <img src="http://s0.wp.com/latex.php?latex=f+-+D%280%29+%3D+%5Cfrac%7B1%7D%7B%5Clog%7B%28x%29%7D%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="f - D(0) = \frac{1}{\log{(x)}}" class="latex" title="f - D(0) = \frac{1}{\log{(x)}}" /> does not have an elementary anti-derivative over <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%2C+%5Clog%7B%28x%29%7D%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x, \log{(x)})" class="latex" title="\mathbb{Q}(x, \log{(x)})" /> (see the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous post</a> for more information).</p>
-<p>Finally, be aware that, just as with <code>integrate_hyperexponential()</code> many integrals will  raise <code>NotImplementedError</code>, because the subroutines necessary to solve them have not yet been finished.</p>
-<pre class="brush: python;">In [25]: f = log(log(x))**2
-
-In [26]: f.diff(x)
-Out[26]:
-2⋅log(log(x))
-─────────────
-   x⋅log(x)
-
-In [27]: a, d = map(lambda i: Poly(i, t1),
-cancel(f.diff(x)).subs(log(x), t0).subs(log(t0), t1).as_numer_denom())
-
-In [28]: a
-Out[28]: Poly(2*t1, t1, domain='ZZ')
-
-In [29]: d
-Out[29]: Poly(t0*x, t1, domain='ZZ[x,t0]')
-
-In [30]: D = [Poly(1, x), Poly(1/x, t0), Poly(1/(x*t0), t1)]
-
-In [31]: integrate_primitive(a, d, D, [x, t0, t1], [lambda x: log(log(x)), log])
----------------------------------------------------------------------------
-NotImplementedError: Remaining cases for Poly RDE not yet implemented.
-</pre>
-<p>Now one thing that I want to add from the above examples taken from the commit message is that logarithms are not the only function that are primitive.  The Li function (the logarithmic integral, as above), considered as an elementary extension of <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%2C+%5Clog%7B%28x%29%7D%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x, \log{(x)})" class="latex" title="\mathbb{Q}(x, \log{(x)})" /> is also primitive.  But even among the commonly defined elementary functions, there is one other, acrtangents.  </p>
-<pre class="brush: python;">In [32]: diff(atan(x)**2, x)
-Out[32]:
-2⋅atan(x)
-─────────
-       2
-  1 + x  
-
-In [33]: integrate_primitive(Poly(2*t, t), Poly(1 + x**2, t), [Poly(1, x), Poly(1/(1 + x**2), t)], [x, t], [atan])
-
-Out[33]:
-⎛    2         ⎞
-⎝atan (x), True⎠
-
-In [34]: integrate_primitive(Poly(t, t), Poly(x, t), [Poly(1, x), Poly(1/(1 + x**2), t)], [x, t], [atan])
-
-Out[34]:
-⎛⌠                  ⎞
-⎜⎮ atan(x)          ⎟
-⎜⎮ ─────── dx, False⎟
-⎜⎮    x             ⎟
-⎝⌡                  ⎠
-</pre>
-<p>Due to a bug in the code right now, the final version returns the non-elementary integral in the final result.  Suffice it to say that it has proven that <img src="http://s0.wp.com/latex.php?latex=%5Cint+%7B%5Cfrac%7B%5Carctan%7B%28x%29%7D%7D%7Bx%7D+dx%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\int {\frac{\arctan{(x)}}{x} dx}" class="latex" title="\int {\frac{\arctan{(x)}}{x} dx}" /> is non-elementary. As far as I know, this isn’t any special function.  Actually, it’s just a random function containing arctan that looked non-elementary to me that I plugged in and found out that I was correct.  It’s very similar in form to the <a href="http://en.wikipedia.org/wiki/Exponential_integral">exponential integral</a> (Ei) or the <a href="http://en.wikipedia.org/wiki/Sine_integral#Sine_integral">Sine/Cosine Integral</a> (Si/Ci), which is how I guessed that it would be non-elementary.  Maybe it should be called ATi().</p>
-<p><strong>Status Update</strong></p>
-<p>So it has come to my attention that the suggested “pencils down” date is one week from Monday, and the hard “pencils down” date is two weeks from Monday (see the <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/timeline">Google Summer of Code Timeline</a>).  Now, no matter how fast I work, my work cannot be pushed in until Mateusz’s latest polys branch gets pushed in, because my work is based on top of it.  I plan on continuing work on the integration algorithm beyond the summer until I finish the transcendental part of the algorithm, and even after that, I want to look into implementing other integration related things, like definite integration using <a href="http://en.wikipedia.org/wiki/Meijer-G">Meijer G-functions,</a> and the algebraic part of the algorithm.  But for now, these are the things that I need to do for the transcendental part, which is this summer’s work:</p>
-<p><em>1. Implement the preparsing algorithms. </em> This part is two-fold.  First, I need to implement algorithms based on the Risch Structure Theorems, which allow me to determine if an extension is algebraic or not (if it is algebraic, we cannot integrate it because only the transcendental part is implemented).  The other part will be the function that actually goes through an expression and tries to build up a differential extension from it so it can be integrated.  This can be a tricky part. For example, if we want to integrate <img src="http://s0.wp.com/latex.php?latex=f+%3D+e%5Ex+%2B+e%5E%7B%5Cfrac%7Bx%7D%7B2%7D%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="f = e^x + e^{\frac{x}{2}}" class="latex" title="f = e^x + e^{\frac{x}{2}}" />, we want to first choose <img src="http://s0.wp.com/latex.php?latex=t_1%3De%5E%7B%5Cfrac%7Bx%7D%7B2%7D%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="t_1=e^{\frac{x}{2}}" class="latex" title="t_1=e^{\frac{x}{2}}" /> so that <img src="http://s0.wp.com/latex.php?latex=f+%3D+t_1%5E2+%2B+t_1&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="f = t_1^2 + t_1" class="latex" title="f = t_1^2 + t_1" />, because if we choose <img src="http://s0.wp.com/latex.php?latex=t_1%3De%5Ex&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="t_1=e^x" class="latex" title="t_1=e^x" />, then <img src="http://s0.wp.com/latex.php?latex=t_2%3De%5E%7B%5Cfrac%7Bx%7D%7B2%7D%7D%3D%5Csqrt%7Bt_1%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="t_2=e^{\frac{x}{2}}=\sqrt{t_1}" class="latex" title="t_2=e^{\frac{x}{2}}=\sqrt{t_1}" /> will be algebraic over <img src="http://s0.wp.com/latex.php?latex=%5Cmathbb%7BQ%7D%28x%2C+t_1%29&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="\mathbb{Q}(x, t_1)" class="latex" title="\mathbb{Q}(x, t_1)" />.  This is one case where we might try adding an algebraic extensions but where it can be avoided.  The solution will have to be to go through and find the common denominators of the exponentials.  I’m also considering that this might happen in more advanced ways, so it could be necessary for the function to backtrack in the extension tree to see if it can do it in an entirely transcendental way.  Fortunately, the Risch Structure Theorems give us a decision procedure for determining if an extension can be written in terms of the previous extensions (is algebraic over it), but this will still be a very hard function to get right.</p>
-<p><em>2. Finish the remaining cases for <code>integrate_hyperexponential()</code> and <code>integrate_primitive()</code>.</em> As you could see in this post, as well as in the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">previous one</a>, there are many integrals that cannot yet be integrated because the special cases for them have not been implemented yet.  Most of these actually rely on implementing the structure theorem algorithms from <strong>1</strong>, and implementing them once that is finished will not take long, because they will just be straight copying of the pseudocode from Bronstein’s book.  But some of them, particularly ones from the primitive case, are not spelt out so well in Bronstein’s book, and will require more thinking (and thus time) on my part.  I should note that the Structure Theorem algorithms are also this way.</p>
-<p><em> 3. Implement the hypertangent case. </em> The ability to integrate in tangent extensions is the other <em>third</em> I mentioned above.  Since tangents require more special casing, I plan on doing this only after I have finished <strong>1</strong> and <strong>2</strong>.  This is actually not much work, because most of the algorithms for solving the particular subproblem for tangents (called the <em>Coupled Risch Differential Equation</em>) are exactly the same as those for solving the subproblem for hyperexponentials (the <em>Risch Differential Equation</em>), which are already (mostly) implemented in the hyperexponential part.  There are only a few extra functions that need to be written for it.  Also, you will still be able to integrate functions that contain tangents, such as <img src="http://s0.wp.com/latex.php?latex=e%5E%7B%5Ctan%7B%28x%29%7D%7D&amp;bg=ffffff&amp;fg=333333&amp;s=0" alt="e^{\tan{(x)}}" class="latex" title="e^{\tan{(x)}}" /> (recall <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">last time</a> that we showed that <code>integrate_hyperexponential()</code> can prove that this does not have an elementary integral).  It just won’t be able to integrate when the top-most extension is a tangent.</p>
-<p>So here is what I plan on doing.  Right now, I am going to focus my work on <strong>1</strong>, since most of <strong>2</strong> can’t be done until it is anyway.  But more importantly, I want to have a prototype user-level function for the Risch Algorithm.  The reason I want this is so that people can try it out, without having to do the preparsing like I did above, but rather they can just call <code>risch_integrate(f, x)</code>, and it will return the integral of <code>f</code>, prove that it is non-elementary and reduce it into the elementary and non-elementary parts, or explain why it cannot do it (either because the function is not transcendental or because something is not implemented yet).  My chief desire for doing this is so that people can try out my code and find the bugs in it for me.  I have already found many critical errors in the code (returns a wrong result), and I want to iron these out before anything goes in.  The best way to do this will be to release a working user-level function and hope that people try it out for me.  </p>
-<p>Also, even if <strong>2</strong> and <strong>3</strong> are not finished, if I have <strong>1</strong>, I can integrate it with <code>integrate()</code> (no pun intended) and just have it bail if it raises <code>NotImplementedError</code> I will need to come up with a way to differentiate between this and the case where it returns an unevaluated <code>Integral</code> because it has proven that an elementary antiderivative does not exist.  Any suggestions?</p>
-<p>I plan on continuing work after the summer until I finish <strong>1</strong> through <strong>3</strong>, though I won’t pretend that my work won’t slow down considerably when I start classes in August.  I also promise to finish the <a href="http://asmeurersympy.wordpress.com/2010/07/12/integration-of-exponential-functions/">Risch Algorithm posts</a> that I promised.</p>
-<p>And for what it’s worth, I plan on working my ass off this next two weeks.</p>
-<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/asmeurersympy.wordpress.com/683/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/asmeurersympy.wordpress.com/683/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=asmeurersympy.wordpress.com&amp;blog=7467151&amp;post=683&amp;subd=asmeurersympy&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://asmeurersympy.wordpress.com/2010/07/31/integration-of-primitive-functions/">by asmeurer at July 31, 2010 06:44 AM</a>
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
-<div class="daygroup">
-<h2>July 30, 2010</h2>
-
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://addisoncugini.blogspot.com/" title="Addison's Blog Page">Addison Cugini</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-936818886435977143.post-5753626938397121846">
-<h4><a href="http://addisoncugini.blogspot.com/2010/07/integration-of-general-quantum.html">Integration of General Quantum</a></h4>
-<div class="entry">
-<div class="content">
-This week, I started to integrate Matt Curry's general quantum stuff into my code; this was done both to prevent replication of code in our two modules and to test to see if his code worked in a practical problem.<br /><br />That said, I spent quite a bit of time this week inside Matt's code.  Dr. Granger and I ported my represent function into Matt's code so that we could represent not just Qbit systems, but also other systems by specifying a BasisSet and how to represent an individual State or Operator in the Basis. Matt and I worked together on developing validate functions that use the new op.priority feature to check to see if Quantum expressions are valid; testing this is still ongoing and has serious limitations because Sympy's AssocOp classes cannot know the special rules that go along with its args. This leads to issues that are hard such as how to call our validate functions automatically when all quantum objects are held within a Sympy binary-operation (e.g. Mul(Operator, |Ket&gt;) + Mul(Operator, |Ket&gt;).<br /><br />While helping Matt get his code up and working, I was also busy inheriting and porting features from Matt's code. This was a pain as little changes caused large errors throughout my code; I especially had a hard time dealing with the ket attribute inside State since Sympy keeps all attributes inside an args list rather than an ensemble of separate attributes with their own names. This ultimately meant that I had to rewrite how I parsed the args for Qbit, making args[0] be a tuple which contained the real attributes and args[1] be information about it being a ket.<br /><br />As I continue to play with Matt's code, I get a better idea of the serious design problems he is running into. These issues have apparently been run into before with  Matrices (The issues with Matrices are very similar in that they have special rules for what can be multiplied and need to maintain these rules even when held inside a Mul object). The Matrix class got around this by standing alone, not inheriting from Expr, and rewriting its own __mul__ method; this meant that, since Expr's don't know how to multiply by Matricies, Python would default to the Matrix's __(r)mul__ method. This is quite kludge-y, I should hope we come up with a better solution than this. The addition of op-priority is a good start to the fix, but will only fully work if the Mul object itself knows how to use this feature.<br /><br />I need to clean up both my and Matt's code in the following weeks as I would like to have a good product by the end of GSoC.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/936818886435977143-5753626938397121846?l=addisoncugini.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://addisoncugini.blogspot.com/2010/07/integration-of-general-quantum.html">by AddisonCugini (noreply@blogger.com) at July 30, 2010 10:07 PM</a>
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
-<div class="daygroup">
-<h2>July 27, 2010</h2>
-
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://haz-tech.blogspot.com/search/label/sympy" title="Tech Talk">Christian Muise</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-22566012.post-6741089899169036082">
-<h4><a href="http://haz-tech.blogspot.com/2010/07/clause-learning-flunk.html">Clause Learning Flunk</a></h4>
-<div class="entry">
-<div class="content">
-A few days back, I was on my way to write up a blog post detailing how impressive the new system is (and it /does/ have some great speedups in there). To be thorough, I wanted to show results for different parameters being disabled, but to my surprise I discovered clause learning was hurting. This flies in the face of everything we know about SAT solving, so the hunt for reasoning commenced.<br /><br />Well long story short, the hunt continues but a likely reason is the lack of impact that the simple clause learning scheme actually has. Monitoring the clauses that cause unit propagation (a measure of how useful a clause is) reveals that the learned clauses aren't actually ever being used -- big-time bummer. It's because of this, I've disabled the conflict analysis in the <a href="http://github.com/haz/sympy/commit/35c0bdab85b754de91a1fb1a606155e9b4628210">latest version</a>.<br /><br />But results are still be be had. First off, how much better are we than the original DPLL solver, and how bad does the clause learning actually hurt? Well the answers are (roughly) pretty good, and not much ;). Here's a graph plotting the run-time for the three approaches (-CA means clause learning was disabled):<br /><br /><div style="clear: both; text-align: center;" class="separator"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/_DvrW_QLstcQ/TE9MirdDSSI/AAAAAAAACLI/VT2jesJMXYc/s1600/dpll.png"><img src="http://3.bp.blogspot.com/_DvrW_QLstcQ/TE9MirdDSSI/AAAAAAAACLI/VT2jesJMXYc/s400/dpll.png" height="315" border="0" width="400" /></a></div><br />Note that the y-axis is on a log scale, so the differences are actually more drastic than they appear. Take-away: the new sat-solver is doing great, and the clause learning doesn't hurt that much...just doesn't help like we'd expect.<br /><br />Next up is the impact of watch literals. I'll have a blog post in a day or two for the final installment of "what goes into a SAT solver", and the focus will be on watch literals. The introduction of this data structure hack heralded in a wave of killer SAT solvers, and they helped out here too. The following is a comparison (with clause learning disabled) between using watch literals and not using them:<br /><br /><div style="clear: both; text-align: center;" class="separator"><a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/_DvrW_QLstcQ/TE9Mivz864I/AAAAAAAACLM/Gkn_qTnwkg0/s1600/watch+literal.png"><img src="http://3.bp.blogspot.com/_DvrW_QLstcQ/TE9Mivz864I/AAAAAAAACLM/Gkn_qTnwkg0/s400/watch+literal.png" height="318" border="0" width="400" /></a></div><br />Oh, and it should be noted that when points don't exist, it's because the solver just couldn't handle it in a reasonable amount of time.<br /><br />So in the interest of actually letting SymPy users see these enhancements, I'm going to wrap up this week with that final post, and post-pone the clause learning investigation until more time is available. Next up is investigating how a <a href="http://en.wikipedia.org/wiki/Truth_maintenance_system">truth maintenance system</a> can be used to smartly cache queries to the assumption framework. If we can avoid repeated SAT queries (no matter how beefy the solver is), that's a win.<br /><br />One final note, there will likely be an incorporation of an industrial SAT-solver interface for those who really want the power. This will be through the <a href="http://4c110.ucc.ie/numberjack/">Numberjack Library</a>, and be optional if you happen to have it installed. The start of it is in <a href="http://github.com/haz/sympy/tree/numberjack">this branch</a>, but we'll need to wait until the next version of Numberjack is released due to limitations it currently has.<br /><br />That's all for now. Cheers.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/22566012-6741089899169036082?l=haz-tech.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://haz-tech.blogspot.com/2010/07/clause-learning-flunk.html">by Haz (noreply@blogger.com) at July 27, 2010 09:26 PM</a>
-</p>
-</div>
-</div>
-
-
-
-</div>
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://fredrik-j.blogspot.com/search/label/sympy" title="Fredrik Johansson">Fredrik Johansson</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-4754734402679928849.post-4782331091283891322">
-<h4><a href="http://fredrik-j.blogspot.com/2010/07/post-sage-days-24-report.html">Post Sage Days 24 report</a></h4>
-<div class="entry">
-<div class="content">
-Now that I've overcome the immediate effects of SDWS (Sage Days Withdrawal Syndrome), I should write a brief report about <a href="http://wiki.sagemath.org/days24">Sage Days 24</a> which took place last week at the <a href="http://www.risc.jku.at/">Research Institute for Symbolic Computation</a> (RISC), located in a small town called Hagenberg just outside Linz in Austria. Many thanks for the organizers for inviting me!<br /><br />Since I'm starting as a Ph.D. student at RISC in October, it was nice to get an early view of the site and meet some current students and staff. The location is quite beautiful, my only complaint being the extremely high temperature last week (they say the weather is more normal most of the year!).<br /><br />SD24 was titled "Symbolic Computation in Differential Algebra and Special Functions", which pretty accurately describes the topics covered. Some points of interest:<br /><br /><a href="http://modular.math.washington.edu/">William Stein</a> talked about his vision for Sage (short and long term), including goals for special functions support.<br /><br /><a href="http://algo.inria.fr/chyzak/">Frédéric Chyzak</a> gave a talk about the <a href="http://ddmf.msr-inria.inria.fr/ddmf">Dynamic Dictionary of Mathematical Functions</a>. I really like the approach of starting from a minimal definition of a special function (a differential equation with initial conditions) and generating series expansions, Chebyshev approximations (etc.) algorithmically.<br /><br /><a href="http://homepages.cwi.nl/~nicot/">Nico Temme</a> talked about numerical evaluation of special functions, which was familiar grounds to me, but with much food for thought.<br /><br />I met <a href="http://www.risc.jku.at/home/mkauers">Manuel Kauers</a>, my future supervisor, who gave a neat <a href="http://www.risc.uni-linz.ac.at/people/mkauers/publications/kauers10d.pdf">presentation</a> of some recent research.<br /><br />There were many other interesting <a href="http://wiki.sagemath.org/days24/schedule">talks</a> and discussions as well, and I gave a talk about special function evaluation in mpmath (based on my SD23 talk). And of course, I met various other Sage developers and got some coding done as well.<br /><br />I had hoped to get generalized hypergeometric functions into Sage during SD24. There is now a <a href="http://trac.sagemath.org/sage_trac/ticket/2516">patch</a>, but it still needs some more work.<br /><br />I also implemented <a href="http://dlmf.nist.gov/12">parabolic cylinder functions</a> (PCFs) in mpmath, the last remaining chapter of hypergeometric functions listed in the <a href="http://dlmf.nist.gov/">DLMF</a> (mpmath now covers chapters 1-20, 22, 24-25, partially 26-27, and 33). <a href="http://code.google.com/p/mpmath/source/detail?r=1178">Code commit here.</a><br /><br />Technically, parabolic cylinder functions are just scaled (linear combinations of) confluent hypergeometric functions or Whittaker functions, but they are a bit tricky to compute due to cancellation and branch cuts.<br /><br />An example from Nico Temme's talk was to evaluate <i>D</i><sub>ν</sub>(<i>z</i>) with ν = -300.14 and <i>z</i> = 300.15 (Maple 13 takes 5 seconds to give an answer that has the wrong sign and is off by 692 orders of magnitude). The new <tt>pcfd</tt> function in mpmath instantaneously (in about a millisecond) gives the correct result:<br /><pre><br />&gt;&gt;&gt; pcfd(-300.14, 300.15)<br />6.83322814925713e-10526<br />&gt;&gt;&gt; mp.dps = 30<br />&gt;&gt;&gt; pcfd('-300.14', '300.15')<br />6.83322814923312844480669009487e-10526<br /></pre><br /><br />All the curve plots from <a href="http://dlmf.nist.gov/12.3">DLMF 12.3</a> can be reproduced as follows:<br /><pre><br />f1 = lambda x: pcfu(0.5,x)<br />f2 = lambda x: pcfu(2,x)<br />f3 = lambda x: pcfu(3.5,x)<br />f4 = lambda x: pcfu(5,x)<br />f5 = lambda x: pcfu(8,x)<br />plot([f1,f2,f3,f4,f5], [-3,3], [0,3])<br /></pre><br /><a href="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8rBfwSyWI/AAAAAAAAAT4/yXcCJbIwnBY/s1600/12.3.1.png"><img src="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8rBfwSyWI/AAAAAAAAAT4/yXcCJbIwnBY/s320/12.3.1.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660974746585442" /></a><br /><pre><br />f1 = lambda x: pcfv(0.5,x)<br />f2 = lambda x: pcfv(2,x)<br />f3 = lambda x: pcfv(3.5,x)<br />f4 = lambda x: pcfv(5,x)<br />f5 = lambda x: pcfv(8,x)<br />plot([f1,f2,f3,f4,f5], [-3,3], [-3,3])<br /></pre><br /><a href="http://4.bp.blogspot.com/_rh0QblLk0C0/TE8q-HO2hkI/AAAAAAAAATw/WXCAP26FD4k/s1600/12.3.2.png"><img src="http://4.bp.blogspot.com/_rh0QblLk0C0/TE8q-HO2hkI/AAAAAAAAATw/WXCAP26FD4k/s320/12.3.2.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660916624262722" /></a><br /><pre><br />f1 = lambda x: pcfu(-0.5,x)<br />f2 = lambda x: pcfu(-2,x)<br />f3 = lambda x: pcfu(-3.5,x)<br />f4 = lambda x: pcfu(-5,x)<br />plot([f1,f2,f3,f4], [-8,8], [-6,6])<br /></pre><br /><a href="http://2.bp.blogspot.com/_rh0QblLk0C0/TE8q9LYwyzI/AAAAAAAAATo/0vcabZzyZAY/s1600/12.3.3.png"><img src="http://2.bp.blogspot.com/_rh0QblLk0C0/TE8q9LYwyzI/AAAAAAAAATo/0vcabZzyZAY/s320/12.3.3.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660900559702834" /></a><br /><pre><br />f1 = lambda x: pcfv(-0.5,x)<br />f2 = lambda x: pcfv(-2,x)<br />f3 = lambda x: pcfv(-3.5,x)<br />f4 = lambda x: pcfv(-5,x)<br />plot([f1,f2,f3,f4], [-8,8], [-6,6])<br /></pre><br /><a href="http://2.bp.blogspot.com/_rh0QblLk0C0/TE8q8_dxhVI/AAAAAAAAATg/yDsmRuu6U08/s1600/12.3.4.png"><img src="http://2.bp.blogspot.com/_rh0QblLk0C0/TE8q8_dxhVI/AAAAAAAAATg/yDsmRuu6U08/s320/12.3.4.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660897359496530" /></a><br /><pre><br />f1 = lambda x: pcfu(-8,x)<br />f2 = lambda x: pcfv(-8,x)*gamma(0.5-(-8))<br />f3 = lambda x: hypot(f1(x), f2(x))<br />plot([f1,f2,f3], [-6,6], [-120,120])<br /></pre><br /><a href="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8q8md5fTI/AAAAAAAAATY/a3iHULych3w/s1600/12.3.5.png"><img src="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8q8md5fTI/AAAAAAAAATY/a3iHULych3w/s320/12.3.5.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660890649132338" /></a><br /><pre><br />f1 = lambda x: diff(pcfu,(-8,x),(0,1))<br />f2 = lambda x: diff(pcfv,(-8,x),(0,1))*gamma(0.5-(-8))<br />f3 = lambda x: hypot(f1(x), f2(x))<br />plot([f1,f2,f3], [-6,6], [-220,220])<br /></pre><br /><a href="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8q8fCSxkI/AAAAAAAAATQ/S8ziTJv4nf4/s1600/12.3.6.png"><img src="http://1.bp.blogspot.com/_rh0QblLk0C0/TE8q8fCSxkI/AAAAAAAAATQ/S8ziTJv4nf4/s320/12.3.6.png" alt="" style="display: block; margin: 0px auto 10px; text-align: center; cursor: pointer; cursor: hand; width: 320px; height: 241px;" border="0" id="BLOGGER_PHOTO_ID_5498660888654300738" /></a><br /><br />A little more information can be found in the <a href="http://mpmath.googlecode.com/svn/trunk/doc/build/functions/bessel.html#parabolic-cylinder-functions">mpmath documentation section for PCFs</a>.<br /><br />Thanks again to the <a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0757627&amp;version=noscript">NSF grant</a> enabling this work.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/4754734402679928849-4782331091283891322?l=fredrik-j.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://fredrik-j.blogspot.com/2010/07/post-sage-days-24-report.html">by Fredrik Johansson (fredrik.johansson@gmail.com) at July 27, 2010 07:19 PM</a>
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
-<div class="daygroup">
-<h2>July 24, 2010</h2>
-
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://ondrejcertik.blogspot.com/search/label/sympy" title="Ondřej Čertík">Ond&#345;ej &#268;ert&iacute;k</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-6568744196982634289.post-274396393864768585">
-<h4><a href="http://ondrejcertik.blogspot.com/2010/07/week-july-19-23.html">Week July 19 - 23</a></h4>
-<div class="entry">
-<div class="content">
-This week I have learned how projections work in detail and wrote it up here:<br /><br /><a href="http://theoretical-physics.net/dev/src/math/la.html">http://theoretical-physics.net/dev/src/math/la.html<br /></a><br />including all proofs (that orthogonal projection finds the closest vector and so on). At the end of the notes I have calculated some examples in 1D, so that one can see that indeed it doesn't depend on the basis and that the basis doesn't even have to be orthogonal. Then one has to use this approach to calculate the coefficients:<br /><br /><a href="http://theoretical-physics.net/dev/src/math/la.html#nonorthogonal-basis">http://theoretical-physics.net/dev/src/math/la.html#nonorthogonal-basis<br /></a><br /><br />I have then implemented it in h1d. Due to the lack of time, I am now developing everything in my private branch. I'll obtain the permission in about 2 or 3 weeks, so then I'll push it into the master.<br /><br />Besides that I have implemented Chebyshev points for orders greater than 48, for which I don't have exact Fekete points anymore (it'd be just a matter of running my sympy script longer, but I was hitting some accuracy issues when solving those large polynomials numerically -- one needs to obtain all roots, so Chebyshev points are ok for now). So I can now represent arbitrary polynomials in 1D. <br /><br />I have implemented powering of the discrete function, it automatically determines which polynomial order it has to use and creates a new discrete function (the power) on the new mesh. I wrote lots of tests for that, and I hit an interesting bug, that my naive comparison code:<br /><pre><br />assert abs(x-y) &lt; eps<br /></pre><br />was not good enough anymore for larger numbers and I had to read some documentation, and implement the following function:<br /><pre><br />@vectorize(0, 1)<br />def feq(a, b, max_relative_error=1e-12, max_absolute_error=1e-12):<br />    a = float(a)<br />    b = float(b)<br />    # if the numbers are close enough (absolutely), then they are equal<br />    if abs(a-b) &lt; max_absolute_error:<br />        return True<br />    # if not, they can still be equal if their relative error is small<br />    if abs(b) &gt; abs(a):<br />        relative_error = abs((a-b)/b)<br />    else:<br />        relative_error = abs((a-b)/a)<br />    return relative_error &lt;= max_relative_error<br /></pre><br />Then I implemented the global H1 and L2 projections, so far the projected function is hardwired, I still need to allow the user to specify any discrete function to be projected. I need to precalculate it and so on.<br /><br />I wrote bunch of tests for the projections and powers and I always discovered some bugs by writing more tests, so the progress is slow, but at least I can trust the code that is tested.<br /><br />I also helped Pavel to fix couple segfaults, as well as some other things.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/6568744196982634289-274396393864768585?l=ondrejcertik.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://ondrejcertik.blogspot.com/2010/07/week-july-19-23.html">by Ondřej Čertík (noreply@blogger.com) at July 24, 2010 02:27 AM</a>
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
-<div class="daygroup">
-<h2>July 23, 2010</h2>
-
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://addisoncugini.blogspot.com/" title="Addison's Blog Page">Addison Cugini</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-936818886435977143.post-2894031447728849147">
-<h4><a href="http://addisoncugini.blogspot.com/2010/07/qalu-and-measurement-gates.html">QALU and Measurement Gates</a></h4>
-<div class="entry">
-<div class="content">
-As I said in the last blog post, measurement has been implemented as a one-shot irreversible function in my code; I made it a function because measurement should not distribute to each orthogonal state inside the quantum state of the system. This could not easily be implemented in Sympy as every object (including my gates) is assumed to be distributive. This leads to some generality problems as one cannot construct a general circuit object with a mix of measurement gates and Unitary Gates. I did a one-shot measurement rather than an ensemble measurement as the one-shot measurement was needed immediately for my implementation of Shor's algorithm.<br /><br />This week, I fixed these problems. In order to ensure measurement did not distribute, I had to subclass Gate into a NonDistributiveGate class which would be given special logic inside my apply method. This required me to carefully review apply and make sure that the .expand() method was used judiciously so that integer factors combined correctly while ensuring that gates did not distribute to the individual orthogonal states. This took much longer than I thought it would. I have also begun to implement a notion of ensemble measurement which will return a tuple of measurement outcomes.<br /><br />Another thing I have been putting off is the creation of a set of quantum logic which implements common arithmetic quantum mechanically; this logic would be key in doing a legitimate and realistic simulation of all processes needed to do Shor's or Grover's algorithms. Making this logic required a look through the literature on reversible logic and a review of my old notes from my assembly language class. Reversible logic requires some junk bits which store extra information; since I am simulating a quantum computer and not a purely classical reversible machine, I can cheat a little and use measurement to irreversibly destroy information which bring down the number of necessary junk bits and the logic needed to manage them. Thus, I was able to implement a quantum mechanical Add, Bitshift and Multiply. I still need to create logic which can take powers and preform the mod function. Also, I might want to consider optimizing the number of gates and junk bits needed for these operations as they require quite a few.<br /><br />The addition of tests to my code has been going smoothly as well. If I want to merge this code by the end of GSoC, I will need to begin to base my code off Matt Curry's code and document-test my code like crazy. These will likely be my primary concern for the next few weeks.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/936818886435977143-2894031447728849147?l=addisoncugini.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://addisoncugini.blogspot.com/2010/07/qalu-and-measurement-gates.html">by AddisonCugini (noreply@blogger.com) at July 23, 2010 07:55 PM</a>
-</p>
-</div>
-</div>
-
-
-
-</div>
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://haz-tech.blogspot.com/search/label/sympy" title="Tech Talk">Christian Muise</a></h3>
-
-
-<div class="entrygroup" id="tag:blogger.com,1999:blog-22566012.post-7163828547914825642">
-<h4><a href="http://haz-tech.blogspot.com/2010/07/clause-learning-and-heuristics.html">Clause Learning and Heuristics</a></h4>
-<div class="entry">
-<div class="content">
-<hr /><div style="text-align: center;"><i>Clause Learning</i></div><br />  Everyone should learn from their mistakes, right? Of course ;). Well SAT solvers are no different. If the solver discovers that the problem has no solution when a subset of the variables are set a certain way, then that is useful knowledge -- this knowledge is captured in the form of new clauses that are added to the theory.<br /><br />  Now you may think that since we're doing a systematic search, we won't ever need that information again: for example if x=True / y=True / z=False led to an inconsistency and we backtracked to try other values of z, y and x, will we ever use the fact that (!x | !y | z) must hold? When using a static variable ordering, the answer is no. This is because if we backtrack, we will never see the same setting of variables again that led to the inconsistency. However static variable orderings are brutal :p.<br /><br />  Let's expand on our example to see clause learning in a little more detail. Imagine the SAT solver went as follows:<br /><br /><ul><li>Set x = True</li><li>From unit propagation set v1 = True and v2 = False</li><li>Set y = True</li><li>From unit propagation set v3 = False, v4 = True, v5 = False</li><li>Set z = False</li><li>From unit propagation we get the empty clause !!conflict!!</li></ul>  So what do we know? Well right off the bat x = v1 = y = v4 = True and v2 = v3 = v5 = z = False is enough to make the theory unsatisfiable (so solution exists with those settings). But remember that unit propagation is a sound procedure -- the variables v1 - v5 are all implied by setting x and y to True [0]. So really just the settings to x, y, and z are enough to cause the problem. How could we have avoided it? Well what if we had the clause (!x | !y | z)? Note that this is just say at least one of the variables was set different. If we had that clause to begin with, our search would have looked like this:<br /><br /><ul><li>Set x = True</li><li>From unit propagation set v1 = True and v2 = False</li><li>Set y = True</li><li>From unit propagation set v3 = False, v4 = True, v5 = False, <b>z = True</b></li><li>...</li></ul><br />  So what we do is add the clause, (!x | !y | z), to our database of clauses and continue the search. Since we're backtracking, we'll set z=True anyways (the clause wasn't really needed), but in the future (say if we backtrack higher and go down another branch, we may face the same decisions. This is when the clause really becomes useful.<br /><br />  Now the method I just described uses a very simple technique to figure out the clause it should create / add -- it picks the negation of all the decisions you've made so far. However there are far more complex schemes that are ongoing research. I may incorporate these into SymPy some day, but for now the default <a href="http://github.com/haz/sympy/commit/e85c6a8d7ac736bcbe1d60c3cb96d4f932421db4">works great</a> ;).<br /><br />  Another common concern (which I'll avoid dealing with for now) is how to detect useless clauses -- eventually learned clauses are no longer triggering and just taking up precious cycles in the solving process (and memory too). Elaborate cache flushing schemes have been proposed (and still are being actively researched), but SymPy likely won't be getting to the point where that would be necessary.<br /><br />  So that's all for clause learning. It's extremely helpful in the context of SAT solving, and is finally in our SymPy solver.<br /><br />[0]: I won't go into detail here, but you get the same result if you set a number of variables and then do unit prop as if you interleaved unit prop with each variable setting.<br /><br /><hr /><div style="text-align: center;"><i>VSIDS Heuristic</i></div><br />  So behind any reasonable SAT solver is a great heuristic. Variable State Independent Decaying Sum (VSIDS) is one such heuristic. What does a heuristic do? Well at each node in the search tree, it should tell you what variable to set, and what to set it to.<br /><br />  VSIDS works by three main steps:<br /><br /><ol><li>First it assigns a score to every literal (or variable setting if you will) matching the number of clauses that the literal appears in. So if a literal is in a large number of clauses, it will be picked before one that isn't.</li><li>Every time a clause is added, the literals in that clause get their score bumped up (by 1). Every time a clause is deleted, the scores get reduced (by 1).</li><li>At regular intervals, /every/ literal has their score reduced by a constant factor (divide by two is typical).</li></ol>  So what does this accomplish? Well at a high level it prefers variable settings that will satisfy the majority of clauses, and over time (through steps 2 and 3) it will prefer literals that will satisfy a large number of learned clauses. This has the effect of avoiding bad parts of the search space where a solution is unlikely to exist.<br /><br />  The SymPy solver <a href="http://github.com/haz/sympy/commit/4690882e075e0ef1bbfdd3f8155e365fcdac17eb">now has VSIDS</a> driving the search, with the one step of #3 missing (coming soon ;)). The beauty of VSIDS is how nicely it plays with the clause-learning of the SAT solver to make things exceptionally fast.<br /><br /><hr /><br />  That's all for now. I'll have another post soon showing some recent results, and one more within the following week to describe the data structures that make all this possible.<br /><br /><hr /><div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/22566012-7163828547914825642?l=haz-tech.blogspot.com" alt="" height="1" width="1" /></div></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://haz-tech.blogspot.com/2010/07/clause-learning-and-heuristics.html">by Haz (noreply@blogger.com) at July 23, 2010 06:34 PM</a>
-</p>
-</div>
-</div>
-
-
 </div>
 
 </div>
@@ -3297,6 +3258,9 @@ As I said in the last blog post, measurement has been implemented as a one-shot 
 <a href="http://fredrik-j.blogspot.com/feeds/posts/default/-/sympy" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://fredrik-j.blogspot.com/search/label/sympy" title="Fredrik Johansson">Fredrik Johansson</a>
 </li>
 <li>
+<a href="http://f1728.wordpress.com/category/SymPy/feed/" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://f1728.wordpress.com" title="f1728 » SymPy">Jeremias Yehdegho</a>
+</li>
+<li>
 <a href="http://sympy-patterns.blogspot.com/feeds/posts/default" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://sympy-patterns.blogspot.com/" title="Pattern matching and simplification in SymPy">Kazuo Thow</a>
 </li>
 <li>
@@ -3309,13 +3273,19 @@ As I said in the last blog post, measurement has been implemented as a one-shot 
 <a href="http://ondrejcertik.blogspot.com/feeds/posts/default/-/sympy" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://ondrejcertik.blogspot.com/search/label/sympy" title="Ondřej Čertík">Ond&#345;ej &#268;ert&iacute;k</a>
 </li>
 <li>
+<a href="http://nessgrh.wordpress.com/feed/" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a>
+</li>
+<li>
+<a href="http://www.vperic.blogspot.com/feeds/posts/default/-/SymPy" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://vperic.blogspot.com/search/label/SymPy" title="Vlada's Blog">Vlada Peric</a>
+</li>
+<li>
 <a href="http://ojensen.wordpress.com/feed/" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://ojensen.wordpress.com" title="Jensen's Sympy Blog">Øyvind Jensen</a>
 </li>
 </ul>
 
 <p>
 <strong>Last updated:</strong><br>
-May 22, 2011 05:00 PM<br>
+May 22, 2011 06:00 PM<br>
 <em>All times are UTC.</em><br>
 <br>
 Powered by:<br>
@@ -3334,4 +3304,3 @@ Powered by:<br>
 </body>
 
 </html>
-

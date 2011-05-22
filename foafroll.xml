@@ -31,6 +31,19 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
+        <foaf:name>Tom Bachmann</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://nessgrh.wordpress.com">
+            <dc:title>nessgrh</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://nessgrh.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
         <foaf:name>Django-SymPy</foaf:name>
         <foaf:weblog>
           <foaf:Document rdf:about="http://dsympy.blogspot.com/">
@@ -167,6 +180,32 @@
             <dc:title>Jensen's Sympy Blog</dc:title>
             <rdfs:seeAlso>
               <rss:channel rdf:about="http://ojensen.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Vlada Peric</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://vperic.blogspot.com/search/label/SymPy">
+            <dc:title>Vlada's Blog</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/8814696591561172392/posts/default/-/SymPy"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Jeremias Yehdegho</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://f1728.wordpress.com">
+            <dc:title>f1728 » SymPy</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://f1728.wordpress.com/category/SymPy/feed/"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
