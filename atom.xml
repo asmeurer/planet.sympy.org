@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:planet="http://planet.intertwingly.net/" xmlns:indexing="urn:atom-extension:indexing" indexing:index="no"><access:restriction xmlns:access="http://www.bloglines.com/about/specs/fac-1.0" relationship="deny"/>
   <title>Planet SymPy</title>
-  <updated>2011-05-23T06:00:12Z</updated>
+  <updated>2011-05-23T06:20:11Z</updated>
   <generator uri="http://intertwingly.net/code/venus/">Venus</generator>
   <author>
     <name>Ondrej Certik</name>
@@ -79,7 +79,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
     <id>http://nessgrh.wordpress.com/?p=147</id>
     <link href="http://nessgrh.wordpress.com/2011/05/09/implementation-details-and-code-structure/" rel="alternate" type="text/html"/>
     <title>Implementation details and code structure</title>
-    <summary type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><img alt="" border="0" height="1" src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=147&amp;subd=nessgrh&amp;ref=&amp;feed=1" width="1"/></div>
+    <summary type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">I think the code should be organised as follows: sympy/functions/special/bessel.py To this file I will add classes representing the Bessel type function families. (The file aready implements spherical integral order bessel functions, which are expressed directly using trigonometric functions.) sympy/functions/special/hyper.py This new file will contain classes for the Hypergeometric and Meijer G function families. The [...]<img alt="" border="0" height="1" src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=147&amp;subd=nessgrh&amp;ref=&amp;feed=1" width="1"/></div>
     </summary>
     <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>I think the code should be organised as follows:</p>
 <ul>
@@ -118,7 +118,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -159,7 +159,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -217,7 +217,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -286,7 +286,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:06Z</updated>
     </source>
   </entry>
 
@@ -368,7 +368,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -450,7 +450,7 @@ In case you don’t know for some reason, Google Summer of Code is a program whe
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -548,7 +548,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -579,7 +579,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -608,7 +608,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-23T06:00:06Z</updated>
+      <updated>2011-05-23T06:20:05Z</updated>
     </source>
   </entry>
 
@@ -1045,7 +1045,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:08Z</updated>
     </source>
   </entry>
 
@@ -1160,7 +1160,7 @@ True
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -1329,7 +1329,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:08Z</updated>
     </source>
   </entry>
 
@@ -1384,7 +1384,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:08Z</updated>
     </source>
   </entry>
 
@@ -1472,7 +1472,7 @@ T = T[:-1]<br/>
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -2133,7 +2133,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -2151,7 +2151,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
 In [2]: np.linspace(0, 1, 5)
 Out[2]: array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ])
 </pre>
-<p>The same functionality can be created by autowrapping a Sympy expression that maps the array index to an interval <img alt="[a, b]" class="latex" src="http://l.wordpress.com/latex.php?latex=%5Ba%2C+b%5D&amp;bg=ffffff&amp;fg=000&amp;s=0" title="[a, b]"/> on the real axis:</p>
+<p>The same functionality can be created by autowrapping a Sympy expression that maps the array index to an interval <img alt="[a, b]" class="latex" src="http://l.wordpress.com/latex.php?latex=%5Ba%2C+b%5D&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="[a, b]"/> on the real axis:</p>
 <pre class="brush: python;">In [3]: from sympy.utilities.autowrap import autowrap
 In [4]: a, b = symbols('a b')
 In [5]: i = Idx('i', m)
@@ -2203,7 +2203,7 @@ end do
 </pre>
 <p>The implemented function has been printed as an <em>inline</em> expression, avoiding a costly function call in the loop.  (If you wonder why I didn’t just print the expression directly, the explanation is <a href="http://github.com/jegerjensen/sympy/commit/9431840359486e37c5feeedfd1e885b91f60af1c">here</a>.)  Now that we have the functions available, this is how they look:</p>
 <div class="wp-caption aligncenter" id="attachment_348" style="width: 460px;"><a href="http://ojensen.files.wordpress.com/2010/08/hydrogen_functions.png"><img alt="Plot of radial hydrogen wavefunctions" class="size-medium wp-image-348 " height="294" src="http://ojensen.files.wordpress.com/2010/08/hydrogen_functions.png?w=450&amp;h=294" title="hydrogen_functions" width="450"/></a><p class="wp-caption-text">Some of the Hydrogen wave functions plotted vs. the radial distance from the nucleus.</p></div>
-<p>The parameters <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n"/> and <img alt="l" class="latex" src="http://l.wordpress.com/latex.php?latex=l&amp;bg=ffffff&amp;fg=000&amp;s=0" title="l"/> are quantum numbers related to the electron’s energy and orbital angular momentum respectively.</p>
+<p>The parameters <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n"/> and <img alt="l" class="latex" src="http://l.wordpress.com/latex.php?latex=l&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="l"/> are quantum numbers related to the electron’s energy and orbital angular momentum respectively.</p>
 <p>The autowrapped Hydrogen functions can also be compared with numpy equivalents, as all waves are expressed in terms of functions that are universal in numpy.  We use Sympy’s ‘lambdify’ to create a Python lambda function that calls the relevant ufuncs from numpy’s namespace:</p>
 <pre class="brush: python;">In [31]: from sympy.utilities.lambdify import lambdify
 In [32]: psi_lambda = lambdify([a, r], R_nl(1, 0, a, r), 'numpy')
@@ -2211,11 +2211,11 @@ In [33]: grid = np.linspace(0,3,100)
 In [34]: np.linalg.norm(psi_lambda(0.5, grid) - hydrogen(0.5, grid))
 Out[34]: 2.21416777433e-15
 </pre>
-<p>But there are many solutions to the Hydrogen atom, so let’s study them a bit more systematically.  The following is the output from a loop over the energy quantum number <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n"/>.  I used only the s-wave functions <img alt="l=0" class="latex" src="http://l.wordpress.com/latex.php?latex=l%3D0&amp;bg=ffffff&amp;fg=000&amp;s=0" title="l=0"/>, corresponding to an electron that moves straight through the nucleus and out on the other side before turning back again to repeat the cycle.  For each <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n"/>, I calculated:</p>
+<p>But there are many solutions to the Hydrogen atom, so let’s study them a bit more systematically.  The following is the output from a loop over the energy quantum number <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n"/>.  I used only the s-wave functions <img alt="l=0" class="latex" src="http://l.wordpress.com/latex.php?latex=l%3D0&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="l=0"/>, corresponding to an electron that moves straight through the nucleus and out on the other side before turning back again to repeat the cycle.  For each <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n"/>, I calculated:</p>
 <ul>
 <li>%timeit for application of lambda function with Numpy ufuncs</li>
 <li>%timeit for application of the compiled and wrapped Sympy function</li>
-<li>the absolute difference between the solutions: <img alt="sum(abs( \psi_{numpy} - \psi_{sympy}))" class="latex" src="http://l.wordpress.com/latex.php?latex=sum%28abs%28+%5Cpsi_%7Bnumpy%7D+-+%5Cpsi_%7Bsympy%7D%29%29&amp;bg=ffffff&amp;fg=000&amp;s=0" title="sum(abs( \psi_{numpy} - \psi_{sympy}))"/></li>
+<li>the absolute difference between the solutions: <img alt="sum(abs( \psi_{numpy} - \psi_{sympy}))" class="latex" src="http://l.wordpress.com/latex.php?latex=sum%28abs%28+%5Cpsi_%7Bnumpy%7D+-+%5Cpsi_%7Bsympy%7D%29%29&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="sum(abs( \psi_{numpy} - \psi_{sympy}))"/></li>
 </ul>
 <p>Here is the output:</p>
 <pre class="brush: python;">n = 1
@@ -2247,10 +2247,10 @@ Numpy: 10000 loops, best of 3: 183 µs per loop
 Sympy: 100000 loops, best of 3: 5.95 µs per loop
 difference: 1.04406500806e-14
 </pre>
-<p>Awesome! For <img alt="n=7" class="latex" src="http://l.wordpress.com/latex.php?latex=n%3D7&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n=7"/> we beat Numpy by a factor of 30. <img alt=":-)" class="wp-smiley" src="http://s2.wp.com/wp-includes/images/smilies/icon_smile.gif"/>   But the really interesting thing here is the <em>scaling</em> with expression complexity.  Look at this:</p>
+<p>Awesome! For <img alt="n=7" class="latex" src="http://l.wordpress.com/latex.php?latex=n%3D7&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n=7"/> we beat Numpy by a factor of 30. <img alt=":-)" class="wp-smiley" src="http://s2.wp.com/wp-includes/images/smilies/icon_smile.gif"/>   But the really interesting thing here is the <em>scaling</em> with expression complexity.  Look at this:</p>
 <p style="text-align: center;">
 </p><div class="wp-caption aligncenter" id="attachment_354" style="width: 460px;"><a href="http://ojensen.files.wordpress.com/2010/08/time_numpy_sympy.png"><img alt="Execution time scaling for increasing expression complexity, Numpy and Sympy" class="size-medium wp-image-354 " height="343.5" src="http://ojensen.files.wordpress.com/2010/08/time_numpy_sympy.png?w=450" title="Scaling of execution time for Numpy and Sympy" width="450"/></a><p class="wp-caption-text">Normalized execution time for Numpy and Sympy.  As n increases, the complexity of the  wave function expression increases, leading to the slowdown.  The values of each curve are normalized against the corresponding n=1 calculation.</p></div>
-<p>For higher <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n"/> the wave function expressions increase in complexity, and so does the execution time of both Numpy and Sympy.  However, while the autowrapped Sympy expression needs 3 times longer for <img alt="n = 7" class="latex" src="http://l.wordpress.com/latex.php?latex=n+%3D+7&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n = 7"/> than for <img alt="n = 1" class="latex" src="http://l.wordpress.com/latex.php?latex=n+%3D+1&amp;bg=ffffff&amp;fg=000&amp;s=0" title="n = 1"/>, the execution time for a lambda of native Numpy ufuncs increases tenfold!</p>
+<p>For higher <img alt="n" class="latex" src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n"/> the wave function expressions increase in complexity, and so does the execution time of both Numpy and Sympy.  However, while the autowrapped Sympy expression needs 3 times longer for <img alt="n = 7" class="latex" src="http://l.wordpress.com/latex.php?latex=n+%3D+7&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n = 7"/> than for <img alt="n = 1" class="latex" src="http://l.wordpress.com/latex.php?latex=n+%3D+1&amp;bg=ffffff&amp;fg=000000&amp;s=0" title="n = 1"/>, the execution time for a lambda of native Numpy ufuncs increases tenfold!</p>
 <div class="wp-caption aligncenter" id="attachment_346" style="width: 460px;"><a href="http://ojensen.files.wordpress.com/2010/08/numpy_sympy.png"><img alt="Plot of Numpy vs. Sympy execution time" class="size-medium wp-image-346 " height="343.5" src="http://ojensen.files.wordpress.com/2010/08/numpy_sympy.png?w=450" title="numpy_sympy" width="450"/></a><p class="wp-caption-text">Numpy execution time vs. Sympy.  The mostly linear relation means that Numpy and Sympy have similar dependence on the complexity of the expression, although the scaling factors are quite different.</p></div>
 <p>This last figure shows the linear relation between execution times of the compiled Sympy expressions and native Numpy lambda function.   The plot supports the idea that the it is the inherent complexity of the mathematical expression that determines the execution time.  By extrapolation, we can expect that for an expression that would take Sympy 9 times longer, Numpy would be hit by a factor of 100.</p>
 <p>The main reason for the speedup, is that while Numpy calculates the wave function by applying a series of ufuncs, the Sympy way is to create a new “ufunc” and apply it once.  It would be very cool to try this in an iterative solution scheme. With a super fast ufunc in a single python loop, one could do complex and cpu-intensive calculations with respectable performance from within isympy.  That would be awesome!</p>
@@ -2270,7 +2270,7 @@ difference: 1.04406500806e-14
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-23T06:00:11Z</updated>
+      <updated>2011-05-23T06:20:10Z</updated>
     </source>
   </entry>
 
@@ -2382,7 +2382,7 @@ In [56]: %timeit M_my = matmat(Q, R)
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-23T06:00:11Z</updated>
+      <updated>2011-05-23T06:20:10Z</updated>
     </source>
   </entry>
 
@@ -2708,7 +2708,7 @@ Out[8]: 0
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-23T06:00:09Z</updated>
+      <updated>2011-05-23T06:20:09Z</updated>
     </source>
   </entry>
 
@@ -2809,7 +2809,7 @@ for (int i=0; i&lt;m; i++){
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-23T06:00:11Z</updated>
+      <updated>2011-05-23T06:20:10Z</updated>
     </source>
   </entry>
 </feed>
