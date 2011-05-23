@@ -2531,7 +2531,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
 In [2]: np.linspace(0, 1, 5)
 Out[2]: array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ])
 </pre>
-<p>The same functionality can be created by autowrapping a Sympy expression that maps the array index to an interval <img src="http://l.wordpress.com/latex.php?latex=%5Ba%2C+b%5D&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="[a, b]" class="latex" title="[a, b]" /> on the real axis:</p>
+<p>The same functionality can be created by autowrapping a Sympy expression that maps the array index to an interval <img src="http://l.wordpress.com/latex.php?latex=%5Ba%2C+b%5D&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="[a, b]" class="latex" title="[a, b]" /> on the real axis:</p>
 <pre class="brush: python;">In [3]: from sympy.utilities.autowrap import autowrap
 In [4]: a, b = symbols('a b')
 In [5]: i = Idx('i', m)
@@ -2583,7 +2583,7 @@ end do
 </pre>
 <p>The implemented function has been printed as an <em>inline</em> expression, avoiding a costly function call in the loop.  (If you wonder why I didn’t just print the expression directly, the explanation is <a href="http://github.com/jegerjensen/sympy/commit/9431840359486e37c5feeedfd1e885b91f60af1c">here</a>.)  Now that we have the functions available, this is how they look:</p>
 <div style="width: 460px;" id="attachment_348" class="wp-caption aligncenter"><a href="http://ojensen.files.wordpress.com/2010/08/hydrogen_functions.png"><img src="http://ojensen.files.wordpress.com/2010/08/hydrogen_functions.png?w=450&amp;h=294" title="hydrogen_functions" height="294" width="450" alt="Plot of radial hydrogen wavefunctions" class="size-medium wp-image-348 " /></a><p class="wp-caption-text">Some of the Hydrogen wave functions plotted vs. the radial distance from the nucleus.</p></div>
-<p>The parameters <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" /> and <img src="http://l.wordpress.com/latex.php?latex=l&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="l" class="latex" title="l" /> are quantum numbers related to the electron’s energy and orbital angular momentum respectively.</p>
+<p>The parameters <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n" class="latex" title="n" /> and <img src="http://l.wordpress.com/latex.php?latex=l&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="l" class="latex" title="l" /> are quantum numbers related to the electron’s energy and orbital angular momentum respectively.</p>
 <p>The autowrapped Hydrogen functions can also be compared with numpy equivalents, as all waves are expressed in terms of functions that are universal in numpy.  We use Sympy’s ‘lambdify’ to create a Python lambda function that calls the relevant ufuncs from numpy’s namespace:</p>
 <pre class="brush: python;">In [31]: from sympy.utilities.lambdify import lambdify
 In [32]: psi_lambda = lambdify([a, r], R_nl(1, 0, a, r), 'numpy')
@@ -2591,11 +2591,11 @@ In [33]: grid = np.linspace(0,3,100)
 In [34]: np.linalg.norm(psi_lambda(0.5, grid) - hydrogen(0.5, grid))
 Out[34]: 2.21416777433e-15
 </pre>
-<p>But there are many solutions to the Hydrogen atom, so let’s study them a bit more systematically.  The following is the output from a loop over the energy quantum number <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" />.  I used only the s-wave functions <img src="http://l.wordpress.com/latex.php?latex=l%3D0&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="l=0" class="latex" title="l=0" />, corresponding to an electron that moves straight through the nucleus and out on the other side before turning back again to repeat the cycle.  For each <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" />, I calculated:</p>
+<p>But there are many solutions to the Hydrogen atom, so let’s study them a bit more systematically.  The following is the output from a loop over the energy quantum number <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n" class="latex" title="n" />.  I used only the s-wave functions <img src="http://l.wordpress.com/latex.php?latex=l%3D0&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="l=0" class="latex" title="l=0" />, corresponding to an electron that moves straight through the nucleus and out on the other side before turning back again to repeat the cycle.  For each <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n" class="latex" title="n" />, I calculated:</p>
 <ul>
 <li>%timeit for application of lambda function with Numpy ufuncs</li>
 <li>%timeit for application of the compiled and wrapped Sympy function</li>
-<li>the absolute difference between the solutions: <img src="http://l.wordpress.com/latex.php?latex=sum%28abs%28+%5Cpsi_%7Bnumpy%7D+-+%5Cpsi_%7Bsympy%7D%29%29&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="sum(abs( \psi_{numpy} - \psi_{sympy}))" class="latex" title="sum(abs( \psi_{numpy} - \psi_{sympy}))" /></li>
+<li>the absolute difference between the solutions: <img src="http://l.wordpress.com/latex.php?latex=sum%28abs%28+%5Cpsi_%7Bnumpy%7D+-+%5Cpsi_%7Bsympy%7D%29%29&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="sum(abs( \psi_{numpy} - \psi_{sympy}))" class="latex" title="sum(abs( \psi_{numpy} - \psi_{sympy}))" /></li>
 </ul>
 <p>Here is the output:</p>
 <pre class="brush: python;">n = 1
@@ -2627,10 +2627,10 @@ Numpy: 10000 loops, best of 3: 183 µs per loop
 Sympy: 100000 loops, best of 3: 5.95 µs per loop
 difference: 1.04406500806e-14
 </pre>
-<p>Awesome! For <img src="http://l.wordpress.com/latex.php?latex=n%3D7&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n=7" class="latex" title="n=7" /> we beat Numpy by a factor of 30. <img src="http://s2.wp.com/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" />   But the really interesting thing here is the <em>scaling</em> with expression complexity.  Look at this:</p>
+<p>Awesome! For <img src="http://l.wordpress.com/latex.php?latex=n%3D7&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n=7" class="latex" title="n=7" /> we beat Numpy by a factor of 30. <img src="http://s2.wp.com/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" />   But the really interesting thing here is the <em>scaling</em> with expression complexity.  Look at this:</p>
 <p style="text-align: center;">
 </p><div style="width: 460px;" id="attachment_354" class="wp-caption aligncenter"><a href="http://ojensen.files.wordpress.com/2010/08/time_numpy_sympy.png"><img src="http://ojensen.files.wordpress.com/2010/08/time_numpy_sympy.png?w=450" title="Scaling of execution time for Numpy and Sympy" height="343.5" width="450" alt="Execution time scaling for increasing expression complexity, Numpy and Sympy" class="size-medium wp-image-354 " /></a><p class="wp-caption-text">Normalized execution time for Numpy and Sympy.  As n increases, the complexity of the  wave function expression increases, leading to the slowdown.  The values of each curve are normalized against the corresponding n=1 calculation.</p></div>
-<p>For higher <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n" class="latex" title="n" /> the wave function expressions increase in complexity, and so does the execution time of both Numpy and Sympy.  However, while the autowrapped Sympy expression needs 3 times longer for <img src="http://l.wordpress.com/latex.php?latex=n+%3D+7&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n = 7" class="latex" title="n = 7" /> than for <img src="http://l.wordpress.com/latex.php?latex=n+%3D+1&amp;bg=ffffff&amp;fg=000&amp;s=0" alt="n = 1" class="latex" title="n = 1" />, the execution time for a lambda of native Numpy ufuncs increases tenfold!</p>
+<p>For higher <img src="http://l.wordpress.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n" class="latex" title="n" /> the wave function expressions increase in complexity, and so does the execution time of both Numpy and Sympy.  However, while the autowrapped Sympy expression needs 3 times longer for <img src="http://l.wordpress.com/latex.php?latex=n+%3D+7&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n = 7" class="latex" title="n = 7" /> than for <img src="http://l.wordpress.com/latex.php?latex=n+%3D+1&amp;bg=ffffff&amp;fg=000000&amp;s=0" alt="n = 1" class="latex" title="n = 1" />, the execution time for a lambda of native Numpy ufuncs increases tenfold!</p>
 <div style="width: 460px;" id="attachment_346" class="wp-caption aligncenter"><a href="http://ojensen.files.wordpress.com/2010/08/numpy_sympy.png"><img src="http://ojensen.files.wordpress.com/2010/08/numpy_sympy.png?w=450" title="numpy_sympy" height="343.5" width="450" alt="Plot of Numpy vs. Sympy execution time" class="size-medium wp-image-346 " /></a><p class="wp-caption-text">Numpy execution time vs. Sympy.  The mostly linear relation means that Numpy and Sympy have similar dependence on the complexity of the expression, although the scaling factors are quite different.</p></div>
 <p>This last figure shows the linear relation between execution times of the compiled Sympy expressions and native Numpy lambda function.   The plot supports the idea that the it is the inherent complexity of the mathematical expression that determines the execution time.  By extrapolation, we can expect that for an expression that would take Sympy 9 times longer, Numpy would be hit by a factor of 100.</p>
 <p>The main reason for the speedup, is that while Numpy calculates the wave function by applying a series of ufuncs, the Sympy way is to create a new “ufunc” and apply it once.  It would be very cool to try this in an iterative solution scheme. With a super fast ufunc in a single python loop, one could do complex and cpu-intensive calculations with respectable performance from within isympy.  That would be awesome!</p>
@@ -3275,7 +3275,7 @@ for (int i=0; i&lt;m; i++){
 <a href="http://nessgrh.wordpress.com/feed/" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://nessgrh.wordpress.com" title="nessgrh">Tom Bachmann</a>
 </li>
 <li>
-<a href="http://www.vperic.blogspot.com/feeds/posts/default/-/SymPy" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://vperic.blogspot.com/search/label/SymPy" title="Vlada's Blog">Vlada Peric</a>
+<a href="http://www.blogger.com/feeds/8814696591561172392/posts/default/-/SymPy" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://vperic.blogspot.com/search/label/SymPy" title="Vlada's Blog">Vlada Peric</a>
 </li>
 <li>
 <a href="http://ojensen.wordpress.com/feed/" title="subscribe"><img src="images/feed-icon-10x10.png" alt="(feed)"></a> <a href="http://ojensen.wordpress.com" title="Jensen's Sympy Blog">Øyvind Jensen</a>
@@ -3284,7 +3284,7 @@ for (int i=0; i&lt;m; i++){
 
 <p>
 <strong>Last updated:</strong><br>
-May 23, 2011 08:00 AM<br>
+May 23, 2011 08:20 AM<br>
 <em>All times are UTC.</em><br>
 <br>
 Powered by:<br>
