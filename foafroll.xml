@@ -5,12 +5,12 @@
     <foaf:homepage/>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Chris Wu</foaf:name>
+        <foaf:name>Tomo Lazovich</foaf:name>
         <foaf:weblog>
-          <foaf:Document rdf:about="http://lasympy.blogspot.com/">
-            <dc:title>lasympy</dc:title>
+          <foaf:Document rdf:about="http://lazovichsympy.wordpress.com">
+            <dc:title>Tomo Lazovich's SymPy Blog</dc:title>
             <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/5997157115341007565/posts/default"/>
+              <rss:channel rdf:about="http://lazovichsympy.wordpress.com/feed/"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
@@ -18,12 +18,64 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Fabian Pedregosa</foaf:name>
+        <foaf:name>Aaron Meurer</foaf:name>
         <foaf:weblog>
-          <foaf:Document rdf:about="http://fseoane.net/blog">
-            <dc:title>F. Pedregosa</dc:title>
+          <foaf:Document rdf:about="http://asmeurersympy.wordpress.com">
+            <dc:title>Aaron Meurer's SymPy Blog</dc:title>
             <rdfs:seeAlso>
-              <rss:channel rdf:about="http://fseoane.net/blog/feed/"/>
+              <rss:channel rdf:about="http://asmeurersympy.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Freddie Witherden</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://gsoc-mathtex.blogspot.com/">
+            <dc:title>GSoC Mathtex</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/7648717043547744590/posts/default"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Matthew Rocklin</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://sympystats.wordpress.com">
+            <dc:title>sympy-stats</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://sympystats.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Jeremias Yehdegho</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://f1728.wordpress.com">
+            <dc:title>f1728 » SymPy</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://f1728.wordpress.com/category/SymPy/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Vladimir Peric</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://vperic.blogspot.com/search/label/SymPy">
+            <dc:title>Vlada's Blog</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/8814696591561172392/posts/default/-/SymPy"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
@@ -37,6 +89,84 @@
             <dc:title>nessgrh</dc:title>
             <rdfs:seeAlso>
               <rss:channel rdf:about="http://nessgrh.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Dale Peterson</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://dlpeterson.com/blog">
+            <dc:title>Dale Peterson</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://dlpeterson.com/blog/?feed=rss2"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Gilbert Gede</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://gilbertgede.wordpress.com">
+            <dc:title>gilbertgede</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://gilbertgede.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Kazuo Thow</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://sympy-patterns.blogspot.com/">
+            <dc:title>Pattern matching and simplification in SymPy</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/8813637465618735152/posts/default"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Sean Vig</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://seanvig.blogspot.com/search/label/sympy">
+            <dc:title>Sean Vig's 2011 GSoC Project</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/8510171342300140296/posts/default/-/sympy"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Ond&amp;#345;ej &amp;#268;ert&amp;iacute;k</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://ondrejcertik.blogspot.com/search/label/sympy">
+            <dc:title>Ondřej Čertík</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/6568744196982634289/posts/default/-/sympy"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Fabian Pedregosa</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://fseoane.net/blog">
+            <dc:title>F. Pedregosa</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://fseoane.net/blog/feed/"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
@@ -83,12 +213,51 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Kazuo Thow</foaf:name>
+        <foaf:name>Sherjil Ozair</foaf:name>
         <foaf:weblog>
-          <foaf:Document rdf:about="http://sympy-patterns.blogspot.com/">
-            <dc:title>Pattern matching and simplification in SymPy</dc:title>
+          <foaf:Document rdf:about="http://sherjilozair.wordpress.com">
+            <dc:title>Sherjil Ozair</dc:title>
             <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/8813637465618735152/posts/default"/>
+              <rss:channel rdf:about="http://sherjilozair.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Øyvind Jensen</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://ojensen.wordpress.com">
+            <dc:title>Jensen's Sympy Blog</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://ojensen.wordpress.com/feed/"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Chris Wu</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://lasympy.blogspot.com/">
+            <dc:title>lasympy</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/5997157115341007565/posts/default"/>
+            </rdfs:seeAlso>
+          </foaf:Document>
+        </foaf:weblog>
+      </foaf:Agent>
+    </foaf:member>
+    <foaf:member>
+      <foaf:Agent>
+        <foaf:name>Official SymPy blog</foaf:name>
+        <foaf:weblog>
+          <foaf:Document rdf:about="http://sympy.blogspot.com/">
+            <dc:title>Official SymPy blog</dc:title>
+            <rdfs:seeAlso>
+              <rss:channel rdf:about="http://www.blogger.com/feeds/2520472460430880330/posts/default"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
@@ -122,129 +291,12 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Aaron Meurer</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://asmeurersympy.wordpress.com">
-            <dc:title>Aaron Meurer's SymPy Blog</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://asmeurersympy.wordpress.com/feed/"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Freddie Witherden</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://gsoc-mathtex.blogspot.com/">
-            <dc:title>GSoC Mathtex</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/7648717043547744590/posts/default"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Official SymPy blog</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://sympy.blogspot.com/">
-            <dc:title>Official SymPy blog</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/2520472460430880330/posts/default"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
         <foaf:name>Matthew Curry</foaf:name>
         <foaf:weblog>
           <foaf:Document rdf:about="http://mattjcurry.blogspot.com/">
             <dc:title>Matt's Blog</dc:title>
             <rdfs:seeAlso>
               <rss:channel rdf:about="http://www.blogger.com/feeds/9135222751616024074/posts/default"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Sean Vig</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://seanvig.blogspot.com/search/label/sympy">
-            <dc:title>Sean Vig's 2011 GSoC Project</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/8510171342300140296/posts/default/-/sympy"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Øyvind Jensen</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://ojensen.wordpress.com">
-            <dc:title>Jensen's Sympy Blog</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://ojensen.wordpress.com/feed/"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Vlada Peric</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://vperic.blogspot.com/search/label/SymPy">
-            <dc:title>Vlada's Blog</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/8814696591561172392/posts/default/-/SymPy"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Jeremias Yehdegho</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://f1728.wordpress.com">
-            <dc:title>f1728 » SymPy</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://f1728.wordpress.com/category/SymPy/feed/"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Ond&amp;#345;ej &amp;#268;ert&amp;iacute;k</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://ondrejcertik.blogspot.com/search/label/sympy">
-            <dc:title>Ondřej Čertík</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://www.blogger.com/feeds/6568744196982634289/posts/default/-/sympy"/>
-            </rdfs:seeAlso>
-          </foaf:Document>
-        </foaf:weblog>
-      </foaf:Agent>
-    </foaf:member>
-    <foaf:member>
-      <foaf:Agent>
-        <foaf:name>Dale Peterson</foaf:name>
-        <foaf:weblog>
-          <foaf:Document rdf:about="http://dlpeterson.com/blog">
-            <dc:title>Dale Peterson</dc:title>
-            <rdfs:seeAlso>
-              <rss:channel rdf:about="http://dlpeterson.com/blog/?feed=rss2"/>
             </rdfs:seeAlso>
           </foaf:Document>
         </foaf:weblog>
