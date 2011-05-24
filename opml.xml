@@ -2,7 +2,7 @@
 <opml version="1.1">
   <head>
     <title>Planet SymPy</title>
-    <dateModified>Tue, 24 May 2011 20:00:12 GMT</dateModified>
+    <dateModified>Tue, 24 May 2011 20:20:12 GMT</dateModified>
     <ownerName>Ondrej Certik</ownerName>
     <ownerEmail>ondrej@certik.cz</ownerEmail>
   </head>
@@ -18,7 +18,7 @@
     <outline type="rss" text="Gilbert Gede" title="gilbertgede" xmlUrl="http://gilbertgede.wordpress.com/feed/"/>
     <outline type="rss" text="Kazuo Thow" title="Pattern matching and simplification in SymPy" xmlUrl="http://www.blogger.com/feeds/8813637465618735152/posts/default"/>
     <outline type="rss" text="Sean Vig" title="Sean Vig's 2011 GSoC Project" xmlUrl="http://www.blogger.com/feeds/8510171342300140296/posts/default/-/sympy"/>
-    <outline type="rss" text="Ond&amp;#345;ej &amp;#268;ert&amp;iacute;k" title="Ond&#x159;ej &#x10C;ert&#xED;k" xmlUrl="http://www.blogger.com/feeds/6568744196982634289/posts/default/-/sympy"/>
+    <outline type="rss" text="Ond&#x159;ej &#x10C;ert&#xED;k" title="Ond&#x159;ej &#x10C;ert&#xED;k" xmlUrl="http://www.blogger.com/feeds/6568744196982634289/posts/default/-/sympy"/>
     <outline type="rss" text="Fabian Pedregosa" title="F. Pedregosa" xmlUrl="http://fseoane.net/blog/feed/"/>
     <outline type="rss" text="Django-SymPy" title="Django-sympy" xmlUrl="http://www.blogger.com/feeds/906926538337296149/posts/default"/>
     <outline type="rss" text="Addison Cugini" title="Addison's Blog Page" xmlUrl="http://www.blogger.com/feeds/936818886435977143/posts/default"/>

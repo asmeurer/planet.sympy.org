@@ -148,7 +148,7 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Ond&amp;#345;ej &amp;#268;ert&amp;iacute;k</foaf:name>
+        <foaf:name>Ondřej Čertík</foaf:name>
         <foaf:weblog>
           <foaf:Document rdf:about="http://ondrejcertik.blogspot.com/search/label/sympy">
             <dc:title>Ondřej Čertík</dc:title>
