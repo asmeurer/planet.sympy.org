@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:planet="http://planet.intertwingly.net/" xmlns:indexing="urn:atom-extension:indexing" indexing:index="no"><access:restriction xmlns:access="http://www.bloglines.com/about/specs/fac-1.0" relationship="deny"/>
   <title>Planet SymPy</title>
-  <updated>2011-05-24T20:40:12Z</updated>
+  <updated>2011-05-24T21:00:20Z</updated>
   <generator uri="http://intertwingly.net/code/venus/">Venus</generator>
   <author>
     <name>Ondrej Certik</name>
@@ -42,7 +42,7 @@
       <link href="http://gilbertgede.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Just another WordPress.com site</subtitle>
       <title>gilbertgede</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:16Z</updated>
     </source>
   </entry>
 
@@ -114,7 +114,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
     <id>http://nessgrh.wordpress.com/?p=147</id>
     <link href="http://nessgrh.wordpress.com/2011/05/09/implementation-details-and-code-structure/" rel="alternate" type="text/html"/>
     <title>Implementation details and code structure</title>
-    <summary type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">I think the code should be organised as follows: sympy/functions/special/bessel.py To this file I will add classes representing the Bessel type function families. (The file aready implements spherical integral order bessel functions, which are expressed directly using trigonometric functions.) sympy/functions/special/hyper.py This new file will contain classes for the Hypergeometric and Meijer G function families. The [...]<img alt="" border="0" height="1" src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=147&amp;subd=nessgrh&amp;ref=&amp;feed=1" width="1"/></div>
+    <summary type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><img alt="" border="0" height="1" src="http://stats.wordpress.com/b.gif?host=nessgrh.wordpress.com&amp;blog=22546379&amp;post=147&amp;subd=nessgrh&amp;ref=&amp;feed=1" width="1"/></div>
     </summary>
     <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>I think the code should be organised as follows:</p>
 <ul>
@@ -153,7 +153,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -194,7 +194,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:07Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -252,7 +252,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -286,7 +286,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://gilbertgede.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Just another WordPress.com site</subtitle>
       <title>gilbertgede</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:16Z</updated>
     </source>
   </entry>
 
@@ -355,7 +355,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:14Z</updated>
     </source>
   </entry>
 
@@ -411,7 +411,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://lazovichsympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My adventures during GSoC 2011</subtitle>
       <title>Tomo Lazovich's SymPy Blog</title>
-      <updated>2011-05-24T20:40:04Z</updated>
+      <updated>2011-05-24T21:00:03Z</updated>
     </source>
   </entry>
 
@@ -442,7 +442,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://gilbertgede.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Just another WordPress.com site</subtitle>
       <title>gilbertgede</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:16Z</updated>
     </source>
   </entry>
 
@@ -495,7 +495,7 @@ P_\nu^{-\mu}(z)&amp;=\frac{\left(z^2-1\right)^{\frac{\mu}{2}}}{2^\mu \sqrt{\pi}\
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:06Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -577,7 +577,7 @@ In case you don’t know for some reason, Google Summer of Code is a program whe
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:05Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -675,7 +675,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -706,7 +706,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -742,7 +742,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://sympystats.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Just another WordPress.com site</subtitle>
       <title>sympy-stats</title>
-      <updated>2011-05-24T20:40:06Z</updated>
+      <updated>2011-05-24T21:00:11Z</updated>
     </source>
   </entry>
 
@@ -771,7 +771,7 @@ pred = svm.<span style="color: black;">libsvm</span>.<span style="color: black;"
       <link href="http://nessgrh.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My GSoC Project</subtitle>
       <title>nessgrh</title>
-      <updated>2011-05-24T20:40:08Z</updated>
+      <updated>2011-05-24T21:00:13Z</updated>
     </source>
   </entry>
 
@@ -1201,7 +1201,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://sherjilozair.wordpress.com/osd.xml" rel="search" type="application/opensearchdescription+xml"/>
       <link href="http://sherjilozair.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <title>Sherjil Ozair</title>
-      <updated>2011-05-24T20:40:10Z</updated>
+      <updated>2011-05-24T21:00:17Z</updated>
     </source>
   </entry>
 
@@ -1233,7 +1233,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://sherjilozair.wordpress.com/osd.xml" rel="search" type="application/opensearchdescription+xml"/>
       <link href="http://sherjilozair.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <title>Sherjil Ozair</title>
-      <updated>2011-05-24T20:40:10Z</updated>
+      <updated>2011-05-24T21:00:17Z</updated>
     </source>
   </entry>
 
@@ -1279,7 +1279,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://sherjilozair.wordpress.com/osd.xml" rel="search" type="application/opensearchdescription+xml"/>
       <link href="http://sherjilozair.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <title>Sherjil Ozair</title>
-      <updated>2011-05-24T20:40:10Z</updated>
+      <updated>2011-05-24T21:00:17Z</updated>
     </source>
   </entry>
 
@@ -1353,7 +1353,7 @@ yep.<span style="color: black;">stop</span><span style="color: black;">(</span><
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:05Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -1468,7 +1468,7 @@ True
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:06Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -1637,7 +1637,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:05Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -1692,7 +1692,7 @@ release.
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:05Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -1780,7 +1780,7 @@ T = T[:-1]<br/>
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:06Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -2441,7 +2441,7 @@ That’s it for now.  Originally, I was also going to include a bit on the struc
       <link href="http://asmeurersympy.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>My blog on my work on SymPy, including my Google Summer of Code 2009 and 2010 projects.</subtitle>
       <title>Aaron Meurer's SymPy Blog</title>
-      <updated>2011-05-24T20:40:06Z</updated>
+      <updated>2011-05-24T21:00:05Z</updated>
     </source>
   </entry>
 
@@ -2578,7 +2578,7 @@ difference: 1.04406500806e-14
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-24T20:40:11Z</updated>
+      <updated>2011-05-24T21:00:19Z</updated>
     </source>
   </entry>
 
@@ -2690,7 +2690,7 @@ In [56]: %timeit M_my = matmat(Q, R)
       <link href="http://ojensen.wordpress.com/?pushpress=hub" rel="hub" type="text/html"/>
       <subtitle>Python, SymPy and Quantum Physics</subtitle>
       <title>Jensen's Sympy Blog</title>
-      <updated>2011-05-24T20:40:11Z</updated>
+      <updated>2011-05-24T21:00:19Z</updated>
     </source>
   </entry>
 </feed>
