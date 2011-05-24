@@ -70,7 +70,7 @@
     </foaf:member>
     <foaf:member>
       <foaf:Agent>
-        <foaf:name>Vladimir Peric</foaf:name>
+        <foaf:name>Vladimir Perić</foaf:name>
         <foaf:weblog>
           <foaf:Document rdf:about="http://vperic.blogspot.com/search/label/SymPy">
             <dc:title>Vlada's Blog</dc:title>
