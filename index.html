@@ -2801,12 +2801,10 @@ of text documents using sparse features, contributed by Olivier Grisel.</a></p><
 <div class="entry">
 <div class="content" lang="en">
 <p>I often find myself debugging python C extensions from gdb, but usually some variables are hidden because aggressive optimizations that distutils sets by default. What I did not know, is that you can prevent those optimizations by passing flags &lt;emph&gt;-O0 -fno-inline&lt;/emph&gt; to gcc in keyword extra_compile_args (note: this will only work in GCC). A complete example would look like:</p>
-<p>[code lang="python"]<br />
-config.add_extension('foo',<br />
-                         sources=['a.c'],<br />
-                         # add this for gdb debug<br />
-                         extra_compile_args=['-O0 -fno-inline'])<br />
-[/code]</p>
+<div style="overflow: auto; white-space: nowrap; width: 435px;" class="codecolorer-container python default"><div style="" class="python codecolorer">config.<span style="color: black;">add_extension</span><span style="color: black;">(</span><span style="color: #483d8b;">'foo'</span>,<br />
+                         sources=<span style="color: black;">[</span><span style="color: #483d8b;">'a.c'</span><span style="color: black;">]</span>,<br />
+                         <span style="color: #808080; font-style: italic;"># add this for gdb debug</span><br />
+                         extra_compile_args=<span style="color: black;">[</span><span style="color: #483d8b;">'-O0 -fno-inline'</span><span style="color: black;">]</span><span style="color: black;">)</span></div></div>
 <p>and your extension becomes much easier to debug from gdb.</p></div>
 
 
@@ -3143,7 +3141,7 @@ difference: 1.04406500806e-14
 
 <p>
 <strong>Last updated:</strong><br>
-May 25, 2011 06:40 AM<br>
+May 25, 2011 07:00 AM<br>
 <em>All times are UTC.</em><br>
 <br>
 Powered by:<br>

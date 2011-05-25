@@ -1239,12 +1239,10 @@ of text documents using sparse features, contributed by Olivier Grisel.&lt;/a&gt
 	<guid isPermaLink="true">http://fseoane.net/blog/2010/flags-to-debug-python-c-extensions/</guid>
 	<link>http://fseoane.net/blog/2010/flags-to-debug-python-c-extensions/</link>
 	<description>&lt;p&gt;I often find myself debugging python C extensions from gdb, but usually some variables are hidden because aggressive optimizations that distutils sets by default. What I did not know, is that you can prevent those optimizations by passing flags &amp;lt;emph&amp;gt;-O0 -fno-inline&amp;lt;/emph&amp;gt; to gcc in keyword extra_compile_args (note: this will only work in GCC). A complete example would look like:&lt;/p&gt;
-&lt;p&gt;[code lang=&quot;python&quot;]&lt;br /&gt;
-config.add_extension('foo',&lt;br /&gt;
-                         sources=['a.c'],&lt;br /&gt;
-                         # add this for gdb debug&lt;br /&gt;
-                         extra_compile_args=['-O0 -fno-inline'])&lt;br /&gt;
-[/code]&lt;/p&gt;
+&lt;div style=&quot;overflow: auto; white-space: nowrap; width: 435px;&quot; class=&quot;codecolorer-container python default&quot;&gt;&lt;div style=&quot;&quot; class=&quot;python codecolorer&quot;&gt;config.&lt;span style=&quot;color: black;&quot;&gt;add_extension&lt;/span&gt;&lt;span style=&quot;color: black;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #483d8b;&quot;&gt;'foo'&lt;/span&gt;,&lt;br /&gt;
+                         sources=&lt;span style=&quot;color: black;&quot;&gt;[&lt;/span&gt;&lt;span style=&quot;color: #483d8b;&quot;&gt;'a.c'&lt;/span&gt;&lt;span style=&quot;color: black;&quot;&gt;]&lt;/span&gt;,&lt;br /&gt;
+                         &lt;span style=&quot;color: #808080; font-style: italic;&quot;&gt;# add this for gdb debug&lt;/span&gt;&lt;br /&gt;
+                         extra_compile_args=&lt;span style=&quot;color: black;&quot;&gt;[&lt;/span&gt;&lt;span style=&quot;color: #483d8b;&quot;&gt;'-O0 -fno-inline'&lt;/span&gt;&lt;span style=&quot;color: black;&quot;&gt;]&lt;/span&gt;&lt;span style=&quot;color: black;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;and your extension becomes much easier to debug from gdb.&lt;/p&gt;</description>
 	<pubDate>Wed, 18 Aug 2010 11:40:51 +0000</pubDate>
 </item>
