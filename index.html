@@ -23,6 +23,42 @@
 <h1>Planet SymPy</h1>
 
 <div class="daygroup">
+<h2>May 25, 2011</h2>
+
+<div class="channelgroup">
+
+
+
+
+
+
+
+<h3><a href="http://seanvig.blogspot.com/search/label/sympy" title="Sean Vig's 2011 GSoC Project">Sean Vig</a></h3>
+
+
+<div class="entrygroup" id="tag:blogger.com,1999:blog-8510171342300140296.post-6117395821810788244">
+<h4><a href="http://seanvig.blogspot.com/2011/05/official-gsoc-start.html">Official GSoC start</a></h4>
+<div class="entry">
+<div class="content">
+This week marks the official start of the Google Summer of Code. While I started getting my feet wet last week after finishing the last of my finals and grading, the bulk of the work has just started turning out. I'll quick cover what I have from this last week and what I'm looking to get working this week.<br /><br />Before the start, I worked out expanding the functionality of the currently implemented x/y/z bases, which work I have <a href="https://github.com/flacjacket/sympy/tree/xyz_bases">here</a>. The previous implementation only allowed for evaluating inner products between states in the same basis and representing the states in the Jz basis and then only with j=1/2 states. Using the Wigner D-function, implemented with the Rotation class, I implemented represent to go between the x/y/z bases for any j values. Both _eval_innerproduct and _rewrite_as were then created to take advantage of the represent function to extend the functionality of the inner product and to implement rewrite between any bases and any arbitrary j values.<br /><br />This seems like this is some documentation and tests away from being pushed, but there is something buggy with the Rotation.d function, implementing the Wigner small d-matrix. I noticed when trying to do<br />&gt;&gt;&gt;qapply(JzBra(1,1)*JzKet(1,1).rewrite('Jx')<br />and I wasn't getting the right answer. As it turns out, the Rotation.d function, which uses Varshalovich 4.3.2 Eq 7, does not give the right answer for Rotation.d(1,1,0,-pi/2) or Rotation.d(1,0,1,pi/2). Namely, there is something wrong with the equation that doesn't change the sign of the matrix element when reversing the sign of the beta Euler angle. Running all four differential representations given by Varshalovich for the small d matrix, Eq 7-10, give the wrong result, so the derivations of these will need to be checked to fix this. I have a bug report up <a href="http://code.google.com/p/sympy/issues/detail?id=2423">here</a>.<br /><br />As for what I will be implementing this week, I already have the basics of the Wigner3j and CG class implemented, the work for this going up <a href="https://github.com/flacjacket/sympy/tree/cg_coeff">here</a>. This includes creating the objects, _some_ of the printing functionality and numerical evaluation of the elements using the wigner.py functions. The meat of the class that I'm currently working on is the cg_simp function, which will simplify expressions of Clebsch-Gordan coefficients. I currently have one case working, that is<br />Sum(CG(a,alpha,0,0,a,alpha),(alpha,-a,a)) == 2a+1<br />which is Varshalovich 8.7.1 Eq 1. There are still some things to smooth out with the implementation, but I should have that worked out a bit better, in addition to some more simplifications by the end of the week.<br /><br />That's all I have for now, watch for updates within the week as to what I've gotten done and what I have yet to do.<div class="blogger-post-footer"><img src="https://blogger.googleusercontent.com/tracker/8510171342300140296-6117395821810788244?l=seanvig.blogspot.com" alt="" height="1" width="1" /></div></div>
+
+
+
+
+
+
+
+<p class="date">
+<a href="http://seanvig.blogspot.com/2011/05/official-gsoc-start.html">by Sean Vig (noreply@blogger.com) at May 25, 2011 05:37 AM</a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<div class="daygroup">
 <h2>May 21, 2011</h2>
 
 <div class="channelgroup">
@@ -3027,128 +3063,6 @@ difference: 1.04406500806e-14
 </div>
 
 </div>
-<div class="daygroup">
-<h2>August 08, 2010</h2>
-
-<div class="channelgroup">
-
-
-
-
-
-
-
-<h3><a href="http://ojensen.wordpress.com" title="Jensen's Sympy Blog">Øyvind Jensen</a></h3>
-
-
-<div class="entrygroup" id="http://ojensen.wordpress.com/?p=219">
-<h4 lang="en"><a href="http://ojensen.wordpress.com/2010/08/08/good-news-everyone/">Good news, everyone!</a></h4>
-<div class="entry">
-<div class="content" lang="en">
-<p>This week has been hectic, but also very fruitful.  I have the functionality I set out for, it works and it is fast!  It still needs testing, polish and bug-fixing and is by no means finished, but it is now possible to define indexed math-expressions, translate to code, compile it, wrap it as a python module and import it again for fast numerical calculations.  All of this can be done without leaving the isympy command interpreter.</p>
-<p>I’ve been hacking on the automatic wrapping of binary routines, refactored the code printers, implemented handling of indexed powers, enabled scalar broadcasting and <a href="http://docs.scipy.org/doc/numpy/reference/ufuncs.html">ufunc</a>-ish  support for arbitrary compiled functions.   For next week I will focus on physics inspired examples, testing of binary code and improving the documentation.  But first, it is time for a little demonstration.</p>
-<p>The latest code is <a href="http://github.com/jegerjensen/sympy/tree/autowrap3">here</a>, if you want to try for yourself.   There are parts that don’t not work properly, for instance the  Cython wrapper cannot handle numpy arrays yet, but as you will see below there are enough working parts that you can do some fancy stuff.</p>
-<h3>The trace of a Matrix — faster that numpy!</h3>
-<p>In an earlier blog post, I showed you that the C printer is able to print the necessary loops to implement summations over array indices.  The Fortran printer has also this functionality now, so it can be used with f2py.  Let’s start with a simple function to calculate numerically the trace of a matrix while running isympy:</p>
-<pre>In [1]: from sympy.utilities.autowrap import autowrap
-In [2]: m, n = symbols('m n', integer=True)
-In [3]: i = Idx('i', m)
-In [4]: j = Idx('j', n)
-In [5]: A = IndexedBase('A')
-In [6]: trace = autowrap(A[i, i])</pre>
-<p>That’s it.  Now lets have a look at the function we created,</p>
-<pre>In [7]: trace?
-Type:        fortran
-String Form:    &lt;fortran object at 0xa93bea8&gt;
-Namespace:    Interactive
-Docstring:
- autofunc - Function signature:
- autofunc = autofunc(a,[m])
- Required arguments:
- a : input rank-2 array('d') with bounds (m,m)
- Optional arguments:
- m := shape(a,0) input int
- Return objects:
- autofunc : float</pre>
-<p>This informative docstring is created by f2py, and only slightly distorted by the blogging software.  It tells us everything we need to know.  Let’s try this function on a numpy array:</p>
-<pre>In [8]: import numpy as np
-In [9]: I = np.asarray(np.eye(1000), order='F')
-In [10]: trace(I)
-Out[10]: 1000.0
-In [11]: timeit trace(I)
-10000 loops, best of 3: 30.3 us per loop
-In [12]: np.trace(I)
-Out[12]: 1000.0
-In [13]: timeit np.trace(I)
-1000 loops, best of 3: 230 us per loop</pre>
-<p>First of all, please notice the parameter “order=’F'” passed to the numpy array.  This ensures that the array is created with column-major memory order which is the Fortran format.  Without that, the array is created with row-major order, and our Fortran function would run much, much slower.</p>
-<p>Now to the fun part: Did you notice the speedup?  The Sympy generated function is almost a factor of 8 faster that numpy!  This is great, and I think I can be really happy about this result.  But it is also time for a little warning: Please don’t take these numbers as some sort of absolute truth.  For all I know I may be comparing apples and oranges.</p>
-<p>In fact, the numbers I present are probably more relevant for a comparison of  compilers and optimization flags.  But, whatever the reason for the  speedups, faster python callable functions is no doubt a good thing.   For the record: I am running this on a little Acer Aspire One using numpy 1.3.0 shipped with Ubuntu 10.04.  The autowrapped binaries are compiled with Ubuntu’s gfortran 4.4.3.</p>
-<h3>Matrix-Matrix product</h3>
-<p>Now lets look at a more expensive array operation.  Whereas the trace of an m*m matrix has a cost of order O(m), the product of two m*m matrices scales like O(m^3).  First we need to express a matrix-matrix product in terms of Indexed Sympy objects and create the binary function.</p>
-<pre>In [14]: B = IndexedBase('B')
-In [15]: C = IndexedBase('C')
-In [16]: o = symbols('o', integer=True)
-In [17]: k = Idx('k', o)
-In [18]: expr_mat_mat = Eq(C[i, j], A[i, k]*B[k, j]); expr_mat_mat
-Out[18]: C[i, j] = A[i, k]⋅B[k, j]</pre>
-<p>The matrix-matrix product displayed at Out[18] is defined in terms of an Equality instance.  This is a handy way to provide the code printers with both an expression and the variable it should be assigned to.  For indexed expressions it is important that the indices on left hand side and right hand side are compatible.  (Compatible means usually that the set of non-dummy indices must be identical, but with the exception that the right hand side can be scalar.)  For the binary function, we get:</p>
-<pre>In [19]: matmat = autowrap(expr_mat_mat)
-In [20]: matmat?
-Type:        fortran
-String Form:    &lt;fortran object at 0x8f35290&gt;
-Namespace:    Interactive
-Docstring:
- autofunc - Function signature:
- c = autofunc(a,b,[m,n,o])
- Required arguments:
- a : input rank-2 array('d') with bounds (m,o)
- b : input rank-2 array('d') with bounds (o,n)
- Optional arguments:
- m := shape(a,0) input int
- n := shape(b,1) input int
- o := shape(a,1) input int
- Return objects:
- c : rank-2 array('d') with bounds (m,n)</pre>
-<p>Now let’s test it with a QR factorization on some numpy arrays:</p>
-<pre>In [21]: M = np.asarray(np.random.rand(100, 100), order='F')
-In [22]: Q, R = np.linalg.qr(M)
-In [23]: M_np = np.dot(Q, R)
-In [24]: M_my = matmat(Q, R)
-In [25]: np.linalg.norm(M_my - M_np)
-Out[25]: 1.7522660836e-14</pre>
-<p>Here is the timing:</p>
-<pre>In [26]: %timeit M_np = np.dot(Q, R)
-100 loops, best of 3: 10.9 ms per loop
-In [27]: %timeit M_my = matmat(Q, R)
-100 loops, best of 3: 6.11 ms per loop</pre>
-<p>This looks impressive! But, I also found that numpy has a much better scaling than what I get from autowrap on this computer:</p>
-<pre>In [53]: M = np.asarray(np.random.rand(400, 400), order='F')
-In [54]: Q, R = np.linalg.qr(M)
-In [55]: %timeit M_np = np.dot(Q, R)
-1 loops, best of 3: 687 ms per loop
-In [56]: %timeit M_my = matmat(Q, R)
-1 loops, best of 3: 1.65 s per loop</pre>
-<p>I believe that this bad scaling must be an issue with gfortran, or rather an issue with how I use it.  The theoretical scaling of O(m^3) correspond to a factor of 64, and while numpy follows theory quite closely, (687/10.9=63.0) the autowrapped function misses by far. (1650/6.11=270) .  On another computer, I tested the same calculations with Intels ifort compiler and got much better results that were consistently better than numpy and had the expected scaling.</p>
-<p>I have more things I want to show, but this blog post is becoming rather long, so stay tuned for more exciting new functionality in the coming days.</p>
-<br />  <a href="http://feeds.wordpress.com/1.0/gocomments/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/comments/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godelicious/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/delicious/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gofacebook/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/facebook/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gotwitter/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/twitter/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/gostumble/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/stumble/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/godigg/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/digg/ojensen.wordpress.com/219/" alt="" border="0" /></a> <a href="http://feeds.wordpress.com/1.0/goreddit/ojensen.wordpress.com/219/" rel="nofollow"><img src="http://feeds.wordpress.com/1.0/reddit/ojensen.wordpress.com/219/" alt="" border="0" /></a> <img src="http://stats.wordpress.com/b.gif?host=ojensen.wordpress.com&amp;blog=13891021&amp;post=219&amp;subd=ojensen&amp;ref=&amp;feed=1" alt="" height="1" border="0" width="1" /></div>
-
-
-
-
-
-
-
-<p class="date">
-<a href="http://ojensen.wordpress.com/2010/08/08/good-news-everyone/">by jegerjensen at August 08, 2010 02:33 PM</a>
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
 
 
 <div class="sidebar">
@@ -3229,7 +3143,7 @@ In [56]: %timeit M_my = matmat(Q, R)
 
 <p>
 <strong>Last updated:</strong><br>
-May 25, 2011 05:40 AM<br>
+May 25, 2011 06:00 AM<br>
 <em>All times are UTC.</em><br>
 <br>
 Powered by:<br>
